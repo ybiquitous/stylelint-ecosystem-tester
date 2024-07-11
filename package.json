@@ -10,8 +10,9 @@
   "author": "Masafumi Koba",
   "scripts": {
     "format": "prettier --write .",
-    "lint": "npm run lint:formatting",
+    "lint": "npm run lint:formatting && npm run lint:md",
     "lint:formatting": "prettier --check .",
+    "lint:md": "remark . --quiet --frail",
     "prepare": "husky",
     "test": "npm run lint"
   },
@@ -19,11 +20,18 @@
     "*.{json,md,yaml,yml}": "prettier --write"
   },
   "prettier": "@stylelint/prettier-config",
+  "remarkConfig": {
+    "plugins": [
+      "@stylelint/remark-preset"
+    ]
+  },
   "devDependencies": {
     "@stylelint/prettier-config": "^3.0.0",
+    "@stylelint/remark-preset": "^5.1.1",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
-    "prettier": "^3.3.2"
+    "prettier": "^3.3.2",
+    "remark-cli": "^12.0.1"
   },
   "engines": {
     "node": ">=20"
