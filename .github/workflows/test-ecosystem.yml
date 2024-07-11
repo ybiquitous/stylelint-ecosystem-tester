@@ -90,21 +90,27 @@ jobs:
           - 'stylelint/stylelint'
           - 'stylelint@latest'
     steps:
-      - name: Get 'owner/repo' from ${{ matrix.package }}
-        id: owner-repo
+      - name: Get repo info from ${{ matrix.package }}
+        id: repo-info
         env:
           PACKAGE: ${{ matrix.package }}
         run: |
-          npm view "${PACKAGE}" 'repository.url' \
-              | sed -E 's/.*github.com\/([^/]+\/[^/]+).*/\1/' \
-              | sed -E 's/\.git$//' \
-              | xargs -I {} echo 'value={}' \
+          repo_url=$(npm view "${PACKAGE}" 'repository.url')
+
+          echo "${repo_url}" \
+              | sed -E 's/.*github.com\/([^/]+\/[^/]+)\.git$/\1/' \
+              | xargs -I {} echo 'fullname={}' \
               >> "${GITHUB_OUTPUT}"
 
-      - name: Checkout ${{ steps.owner-repo.outputs.value }}
+          echo "${repo_url}" \
+              | sed -E 's/^git\+(.+)\.git$/\1/' \
+              | xargs -I {} echo 'url={}' \
+              >> "${GITHUB_OUTPUT}"
+
+      - name: Checkout ${{ steps.repo-info.outputs.url }}
         uses: actions/checkout@v4
         with:
-          repository: ${{ steps.owner-repo.outputs.value }}
+          repository: ${{ steps.repo-info.outputs.fullname }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
