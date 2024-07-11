@@ -18,7 +18,7 @@ jobs:
           - prettier/stylelint-prettier
           - stylelint-scss/stylelint-scss
         stylelint-version:
-          - https://github.com/stylelint/stylelint/tarball/HEAD
+          - stylelint/stylelint
     steps:
       - name: Checkout ${{ matrix.repository }}
         uses: actions/checkout@v4
@@ -39,7 +39,7 @@ jobs:
         run: npm install
 
       - name: Install Stylelint from ${{ matrix.stylelint-version }}
-        run: npm install --verbose ${{ matrix.stylelint-version }}
+        run: npm install --no-save --no-audit --verbose ${{ matrix.stylelint-version }}
 
       - name: Run test
         run: npm test
