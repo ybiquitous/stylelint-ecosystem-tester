@@ -1,20 +1,24 @@
 {
   "name": "stylelint-ecosystem-tester",
   "version": "0.0.0",
-  "description": "A comprehensive test suite for Stylelint ecosystem",
+  "description": "A comprehensive test suite for Stylelint ecosystem.",
   "keywords": [
     "stylelint"
   ],
+  "repository": "ybiquitous/stylelint-ecosystem-tester",
   "license": "MIT",
   "author": "Masafumi Koba",
-  "main": "index.js",
   "scripts": {
     "format": "prettier . --write",
-    "lint:formatting": "prettier . --check"
+    "lint:formatting": "prettier . --check",
+    "test": "npm run lint:formatting"
   },
   "prettier": "@stylelint/prettier-config",
   "devDependencies": {
     "@stylelint/prettier-config": "^3.0.0",
     "prettier": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
