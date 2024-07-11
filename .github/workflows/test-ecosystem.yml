@@ -95,17 +95,14 @@ jobs:
         env:
           PACKAGE: ${{ matrix.package }}
         run: |
-          repo_url=$(npm view "${PACKAGE}" 'repository.url')
+          raw_url=$(npm view "${PACKAGE}" 'repository.url')
 
-          echo "${repo_url}" \
-              | sed -E 's/.*github.com\/([^/]+\/[^/]+)\.git$/\1/' \
-              | xargs -I {} echo 'fullname={}' \
-              >> "${GITHUB_OUTPUT}"
+          fullname=$(echo "${raw_url}" | sed -E 's/.*github.com\/([^/]+\/[^/]+)\.git$/\1/')
+          echo "fullname=${fullname}" >> "${GITHUB_OUTPUT}"
 
-          echo "${repo_url}" \
-              | sed -E 's/^git\+(.+)\.git$/\1/' \
-              | xargs -I {} echo 'url={}' \
-              >> "${GITHUB_OUTPUT}"
+          url=$(echo "${raw_url}" | sed -E 's/^git\+(.+)\.git$/\1/')
+          echo "URL: ${url}"
+          echo "url=${url}" >> "${GITHUB_OUTPUT}"
 
       - name: Checkout ${{ steps.repo-info.outputs.url }}
         uses: actions/checkout@v4
