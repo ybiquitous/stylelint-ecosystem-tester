@@ -12,6 +12,8 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
+        stylelint-version:
+          - github:stylelint/stylelint#main
         repository:
           - stylelint-scss/stylelint-scss
           - hudochenkov/stylelint-order
@@ -33,6 +35,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Install Stylelint from ${{ matrix.stylelint-version }}
+        run: npm install '${{ matrix.stylelint-version }}'
 
       - name: Run test
         run: npm test
