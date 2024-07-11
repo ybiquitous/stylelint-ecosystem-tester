@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
+      fail-fast: false
       matrix:
         stylelint-version:
           - https://github.com/stylelint/stylelint
@@ -35,7 +36,7 @@ jobs:
           echo "npm: $(npm --version)"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Install Stylelint from ${{ matrix.stylelint-version }}
         run: npm install '${{ matrix.stylelint-version }}'
