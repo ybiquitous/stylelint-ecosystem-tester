@@ -29,6 +29,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
+          cache: npm
 
       - name: Install latest npm
         run: |
@@ -39,7 +40,7 @@ jobs:
         run: npm install
 
       - name: Install Stylelint from ${{ matrix.stylelint-version }}
-        run: npm install --no-save --no-audit --verbose ${{ matrix.stylelint-version }}
+        run: npm install --no-save --no-audit ${{ matrix.stylelint-version }}
 
       - name: Run test
         run: npm test
