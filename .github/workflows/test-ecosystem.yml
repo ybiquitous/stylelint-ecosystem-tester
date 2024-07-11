@@ -1,0 +1,35 @@
+name: Test Ecosystem
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        repository:
+          - stylelint-scss/stylelint-scss
+          - hudochenkov/stylelint-order
+    steps:
+      - name: Checkout ${{ matrix.repository }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.repository }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install latest npm
+        run: |
+          npm install --global npm@latest
+          echo "npm: $(npm --version)"
+
+      - name: Run test
+        run: npm test
