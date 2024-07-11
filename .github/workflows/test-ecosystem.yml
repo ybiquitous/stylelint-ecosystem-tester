@@ -8,6 +8,10 @@ on:
   schedule:
     - cron: '0 0 * * *' # Every day at 00:00 UTC
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -82,7 +86,7 @@ jobs:
           - 'stylelint/stylelint'
           - 'stylelint@latest'
     steps:
-      - name: Get 'owner/repo' value
+      - name: Get 'owner/repo' from ${{ matrix.package }}
         id: owner-repo
         env:
           PACKAGE: ${{ matrix.package }}
@@ -107,6 +111,11 @@ jobs:
         run: |
           npm install --global npm@latest
           echo "npm: $(npm --version)"
+
+      - name: Install pnpm
+        run: |
+          npm install --global pnpm
+          echo "pnpm: $(pnpm --version)"
 
       - name: Install dependencies
         run: npm install --no-audit
