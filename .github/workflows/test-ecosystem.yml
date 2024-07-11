@@ -5,6 +5,8 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Every day at 00:00 UTC
 
 jobs:
   test:
@@ -13,17 +15,88 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        repository:
-          - hudochenkov/stylelint-order
-          - prettier/stylelint-prettier
-          - stylelint-scss/stylelint-scss
+        # Based on https://www.npmjs.com/search?q=keywords%3Astylelint-plugin&ranking=popularity
+        package:
+          # In alphabetical order
+          - '@1024pix/stylelint-config-rational-order'
+          - '@double-great/stylelint-a11y'
+          - '@mozaic-ds/stylelint-plugin-mozaic'
+          - '@namics/stylelint-bem'
+          - '@o3r/stylelint-plugin'
+          - '@ronilaukkarinen/stylelint-a11y'
+          - '@shopify/stylelint-plugin'
+          - '@stylistic/stylelint-plugin'
+          - 'stylelint-8-point-grid'
+          - 'stylelint-a11y'
+          - 'stylelint-at-rule-no-children'
+          - 'stylelint-browser-compat'
+          - 'stylelint-color-format'
+          - 'stylelint-config-rational-order'
+          - 'stylelint-config-rational-order-fix'
+          - 'stylelint-csstree-validator'
+          - 'stylelint-declaration-block-no-ignored-properties'
+          - 'stylelint-declaration-strict-value'
+          - 'stylelint-declaration-use-variable'
+          - 'stylelint-file-max-lines'
+          - 'stylelint-gamut'
+          - 'stylelint-group-selectors'
+          - 'stylelint-high-performance-animation'
+          - 'stylelint-images'
+          - 'stylelint-less'
+          - 'stylelint-max-lines'
+          - 'stylelint-media-use-custom-media'
+          - 'stylelint-no-browser-hacks'
+          - 'stylelint-no-indistinguishable-colors'
+          - 'stylelint-no-nested-media'
+          - 'stylelint-no-px'
+          - 'stylelint-no-restricted-syntax'
+          - 'stylelint-no-unresolved-module'
+          - 'stylelint-no-unsupported-browser-features'
+          - 'stylelint-no-unused-selectors'
+          - 'stylelint-number-z-index-constraint'
+          - 'stylelint-order'
+          - 'stylelint-performance-animation'
+          - 'stylelint-plugin-defensive-css'
+          - 'stylelint-plugin-logical-css'
+          - 'stylelint-plugin-stylus'
+          - 'stylelint-prettier'
+          - 'stylelint-react-native'
+          - 'stylelint-rem-over-px'
+          - 'stylelint-rscss'
+          - 'stylelint-scss'
+          - 'stylelint-selector-bem-pattern'
+          - 'stylelint-selector-no-empty'
+          - 'stylelint-selector-pseudo-class-lvhfa'
+          - 'stylelint-selector-tag-no-without-class'
+          - 'stylelint-semantic-groups'
+          - 'stylelint-stylus'
+          - 'stylelint-suitcss'
+          - 'stylelint-taro-rn'
+          - 'stylelint-use-logical'
+          - 'stylelint-use-logical-spec'
+          - 'stylelint-use-nesting'
+          - 'stylelint-value-list-box-shadow-inset-first'
+          - 'stylelint-value-no-unknown-custom-properties'
+          - 'stylelint-z-index-value-constraint'
         stylelint-version:
-          - stylelint/stylelint
+          - 'stylelint/stylelint'
+          - 'stylelint@latest'
     steps:
-      - name: Checkout ${{ matrix.repository }}
+      - name: Get 'owner/repo' value
+        id: owner-repo
+        env:
+          PACKAGE: ${{ matrix.package }}
+        run: |
+          npm view "${PACKAGE}" 'repository.url' \
+              | sed -E 's/.*github.com\/([^/]+\/[^/]+).*/\1/' \
+              | sed -E 's/\.git$//' \
+              | xargs -I {} echo 'value={}' \
+              >> "${GITHUB_OUTPUT}"
+
+      - name: Checkout ${{ steps.owner-repo.outputs.value }}
         uses: actions/checkout@v4
         with:
-          repository: ${{ matrix.repository }}
+          repository: ${{ steps.owner-repo.outputs.value }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -39,7 +112,7 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit
 
-      - name: Install Stylelint from ${{ matrix.stylelint-version }}
+      - name: Install Stylelint ${{ matrix.stylelint-version }}
         run: npm install --no-audit --no-save ${{ matrix.stylelint-version }}
 
       - name: Run test
