@@ -10,9 +10,10 @@
   "author": "Masafumi Koba",
   "scripts": {
     "format": "prettier --write .",
+    "lint": "npm run lint:formatting",
     "lint:formatting": "prettier --check .",
     "prepare": "husky",
-    "test": "npm run lint:formatting"
+    "test": "npm run lint"
   },
   "lint-staged": {
     "*.{json,md,yaml,yml}": "prettier --write"
