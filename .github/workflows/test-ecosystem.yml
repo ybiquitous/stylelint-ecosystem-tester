@@ -13,10 +13,11 @@ jobs:
     strategy:
       matrix:
         stylelint-version:
-          - github:stylelint/stylelint#main
+          - https://github.com/stylelint/stylelint
         repository:
-          - stylelint-scss/stylelint-scss
           - hudochenkov/stylelint-order
+          - prettier/stylelint-prettier
+          - stylelint-scss/stylelint-scss
     steps:
       - name: Checkout ${{ matrix.repository }}
         uses: actions/checkout@v4
