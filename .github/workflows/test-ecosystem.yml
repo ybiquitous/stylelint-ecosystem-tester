@@ -39,7 +39,7 @@ jobs:
         run: npm install
 
       - name: Install Stylelint from ${{ matrix.stylelint-version }}
-        run: npm install --save ${{ matrix.stylelint-version }}
+        run: npm install --verbose ${{ matrix.stylelint-version }}
 
       - name: Run test
         run: npm test
