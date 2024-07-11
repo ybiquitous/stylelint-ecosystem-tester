@@ -20,6 +20,10 @@ jobs:
       fail-fast: false
       matrix:
         # Based on https://www.npmjs.com/search?q=keywords%3Astylelint-plugin&ranking=popularity
+        # The following snippet on a browser dev console is helpful to create this list.
+        #
+        #     [...document.querySelectorAll('a[href^="/package"][target="_self"]')].map(a => a.href.replace(/.+\/package\/(.+)$/, "- '$1'")).sort().join("\n")
+        #
         package:
           # In alphabetical order
           - '@1024pix/stylelint-config-rational-order'
