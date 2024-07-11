@@ -13,12 +13,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        stylelint-version:
-          - https://github.com/stylelint/stylelint
         repository:
           - hudochenkov/stylelint-order
           - prettier/stylelint-prettier
           - stylelint-scss/stylelint-scss
+        stylelint-version:
+          - https://github.com/stylelint/stylelint/tarball/HEAD
     steps:
       - name: Checkout ${{ matrix.repository }}
         uses: actions/checkout@v4
