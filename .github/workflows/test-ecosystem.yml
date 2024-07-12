@@ -19,33 +19,84 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Based on https://www.npmjs.com/search?q=keywords%3Astylelint-plugin&ranking=popularity
-        # The following snippet on a browser dev console is helpful to create this list.
+        # Based on the following search results:
+        # - https://www.npmjs.com/search?q=keywords%3Astylelint-config&ranking=popularity
+        # - https://www.npmjs.com/search?q=keywords%3Astylelint-plugin&ranking=popularity
+        #
+        # The following snippet on a browser dev console may be helpful to create this list.
         #
         #     [...document.querySelectorAll('a[href^="/package"][target="_self"]')].map(a => a.href.replace(/.+\/package\/(.+)$/, "- '$1'")).sort().join("\n")
         #
         package:
           # In alphabetical order
           - '@1024pix/stylelint-config-rational-order'
+          - '@10up/stylelint-config'
+          - '@bandlab/stylelint-config-bandlab'
+          - '@cerner/stylelint-config-terra'
           - '@csstools/stylelint-at-risk'
           - '@csstools/stylelint-no-at-nest-rule'
           - '@csstools/stylelint-no-invalid-at-import-rules-when-bundling'
+          - '@design-systems/stylelint-config'
           - '@double-great/stylelint-a11y'
+          - '@groww-tech/stylelint-config'
+          - '@jetbrains/stylelint-config'
+          - '@mediamonks/stylelint-config'
           - '@namics/stylelint-bem'
           - '@o3r/stylelint-plugin'
+          - '@primer/stylelint-config'
+          - '@pro-vision/stylelint-config-pv'
           - '@ronilaukkarinen/stylelint-a11y'
           - '@shopify/stylelint-plugin'
+          - '@so1ve/stylelint-config-basic'
+          - '@springernature/stylelint-config'
+          - '@stylistic/stylelint-config'
           - '@stylistic/stylelint-plugin'
+          - '@wemake-services/stylelint-config-scss'
+          - '@wordpress/stylelint-config'
           - 'stylelint-8-point-grid'
           - 'stylelint-a11y'
           - 'stylelint-browser-compat'
           - 'stylelint-color-format'
+          - 'stylelint-config-ali'
+          - 'stylelint-config-astro'
+          - 'stylelint-config-bod'
+          - 'stylelint-config-clean-order'
+          - 'stylelint-config-cloudfour'
+          - 'stylelint-config-coldfront'
+          - 'stylelint-config-concentric-order'
+          - 'stylelint-config-css-modules'
+          - 'stylelint-config-html'
+          - 'stylelint-config-idiomatic-order'
+          - 'stylelint-config-kyt'
+          - 'stylelint-config-prestashop'
+          - 'stylelint-config-property-sort-order-smacss'
           - 'stylelint-config-rational-order'
           - 'stylelint-config-rational-order-fix'
+          - 'stylelint-config-recess-order'
+          - 'stylelint-config-recommended'
+          - 'stylelint-config-recommended-less'
+          - 'stylelint-config-recommended-scss'
+          - 'stylelint-config-recommended-vue'
+          - 'stylelint-config-sass-guidelines'
+          - 'stylelint-config-shopify'
+          - 'stylelint-config-sky-uk'
+          - 'stylelint-config-standard'
+          - 'stylelint-config-standard-less'
+          - 'stylelint-config-standard-scss'
+          - 'stylelint-config-standard-vue'
+          - 'stylelint-config-styled-components'
+          - 'stylelint-config-suitcss'
+          - 'stylelint-config-tailwindcss'
+          - 'stylelint-config-taro-rn'
+          - 'stylelint-config-twbs-bootstrap'
+          - 'stylelint-config-wikimedia'
+          - 'stylelint-config-xo'
+          - 'stylelint-config-xo-scss'
           - 'stylelint-csstree-validator'
           - 'stylelint-declaration-block-no-ignored-properties'
           - 'stylelint-declaration-strict-value'
           - 'stylelint-declaration-use-variable'
+          - 'stylelint-define-config'
           - 'stylelint-file-max-lines'
           - 'stylelint-gamut'
           - 'stylelint-group-selectors'
@@ -108,12 +159,17 @@ jobs:
           echo "Directory: ${directory}"
           echo "directory=${directory}" >> "${GITHUB_OUTPUT}"
 
-          # TODO: Add repo info to https://github.com/3846masa/stylelint-browser-compat
-          if [[ "${url}" == 'null' ]]; then
-            echo "::warning ::The repository info is missing. Visit https://github.com/3846masa/stylelint-browser-compat"
-            echo "url=https://github.com/3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
-            echo "fullname=3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
-          fi
+          case "${PACKAGE}" in
+            stylelint-browser-compat)
+              echo "::warning ::The repository info is missing. Visit https://github.com/3846masa/stylelint-browser-compat"
+              echo "url=https://github.com/3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
+              echo "fullname=3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
+              ;;
+            stylelint-config-ali)
+              echo "::warning ::The repository directory is missing. Visit ${url}"
+              echo "directory=packages/stylelint-config-ali" >> "${GITHUB_OUTPUT}"
+              ;;
+          esac
 
       - name: Checkout ${{ steps.repo-info.outputs.fullname }}
         uses: actions/checkout@v4
