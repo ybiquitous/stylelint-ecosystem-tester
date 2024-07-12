@@ -105,6 +105,12 @@ jobs:
           echo "Directory: ${directory}"
           echo "directory=${directory}" >> "${GITHUB_OUTPUT}"
 
+          # TODO: Add repo info to https://github.com/3846masa/stylelint-browser-compat
+          if [[ -z "${url}" ]]; then
+            echo "url=https://github.com/3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
+            echo "fullname=3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
+          fi
+
       - name: Checkout ${{ steps.repo-info.outputs.fullname }}
         uses: actions/checkout@v4
         with:
