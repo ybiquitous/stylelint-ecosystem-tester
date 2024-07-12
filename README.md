@@ -5,7 +5,7 @@
 
 A comprehensive test suite for [Stylelint](https://stylelint.io) ecosystem.
 
-To see test results, visit the [Actions page](https://github.com/ybiquitous/stylelint-ecosystem-tester/actions/workflows/test-ecosystem.yml).
+To see test results, visit the [Actions page](https://github.com/ybiquitous/stylelint-ecosystem-tester/actions/workflows/test-ecosystem.yml?query=branch%3Amain).
 
 ## Contributing
 
