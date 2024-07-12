@@ -82,7 +82,6 @@ jobs:
           - 'stylelint-config-standard-vue'
           - 'stylelint-config-styled-components'
           - 'stylelint-config-suitcss'
-          - 'stylelint-config-tailwindcss'
           - 'stylelint-config-taro-rn'
           - 'stylelint-config-twbs-bootstrap'
           - 'stylelint-config-wikimedia'
