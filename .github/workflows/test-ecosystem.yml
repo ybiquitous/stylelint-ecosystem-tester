@@ -110,6 +110,7 @@ jobs:
 
           # TODO: Add repo info to https://github.com/3846masa/stylelint-browser-compat
           if [[ "${url}" == 'null' ]]; then
+            echo "::warning title=${PACKAGE}::The repository is missing. Visit https://github.com/3846masa/stylelint-browser-compat"
             echo "url=https://github.com/3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
             echo "fullname=3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
           fi
@@ -142,12 +143,21 @@ jobs:
       - name: Install dependencies
         continue-on-error: true
         working-directory: ${{ steps.repo-info.outputs.directory }}
-        run: npm install --no-audit
+        env:
+          PACKAGE: ${{ matrix.package }}
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: |
+          npm install --no-audit || echo "::error title=${PACKAGE}::The dependency installation failed. Visit ${PACKAGE_URL}"
 
       - name: Install Stylelint ${{ matrix.stylelint-version }}
         continue-on-error: true
         working-directory: ${{ steps.repo-info.outputs.directory }}
-        run: npm install --no-audit --no-save ${{ matrix.stylelint-version }}
+        env:
+          STYLELINT_VERSION: ${{ matrix.stylelint-version }}
+          PACKAGE: ${{ matrix.package }}
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: |
+          npm install --no-audit --no-save "${STYLELINT_VERSION}" || echo "::error title=${PACKAGE}::The Stylelint installation failed. Visit ${PACKAGE_URL}"
 
       - name: Run test
         continue-on-error: true
