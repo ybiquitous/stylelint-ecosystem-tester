@@ -40,7 +40,6 @@ jobs:
           - '@shopify/stylelint-plugin'
           - '@stylistic/stylelint-config'
           - '@stylistic/stylelint-plugin'
-          - '@wemake-services/stylelint-config-scss'
           - '@wordpress/stylelint-config'
           - 'stylelint-browser-compat'
           - 'stylelint-color-format'
