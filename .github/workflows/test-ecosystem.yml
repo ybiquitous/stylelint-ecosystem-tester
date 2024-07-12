@@ -95,16 +95,19 @@ jobs:
         env:
           PACKAGE: ${{ matrix.package }}
         run: |
-          raw_url=$(npm view "${PACKAGE}" 'repository.url')
-
-          fullname=$(echo "${raw_url}" | sed -E 's/.*github.com\/([^/]+\/[^/]+)\.git$/\1/')
-          echo "fullname=${fullname}" >> "${GITHUB_OUTPUT}"
-
-          url=$(echo "${raw_url}" | sed -E 's/^git\+//' | sed -E 's/\.git$//' | sed -E 's/^git:/https:/')
+          url=$(npm repo --browser=false --json "${PACKAGE}" | jq -r '.url')
           echo "URL: ${url}"
           echo "url=${url}" >> "${GITHUB_OUTPUT}"
 
-      - name: Checkout ${{ steps.repo-info.outputs.url }}
+          fullname=$(echo "${url}" | sed -E 's/.*github.com\/([^/]+\/[^/]+).*/\1/')
+          echo "Fullname: ${fullname}"
+          echo "fullname=${fullname}" >> "${GITHUB_OUTPUT}"
+
+          directory=$(npm view "${PACKAGE}" 'repository.directory')
+          echo "Directory: ${directory}"
+          echo "directory=${directory}" >> "${GITHUB_OUTPUT}"
+
+      - name: Checkout ${{ steps.repo-info.outputs.fullname }}
         uses: actions/checkout@v4
         with:
           repository: ${{ steps.repo-info.outputs.fullname }}
@@ -131,14 +134,17 @@ jobs:
 
       - name: Install dependencies
         continue-on-error: true
+        working-directory: ${{ steps.repo-info.outputs.directory }}
         run: npm install --no-audit
 
       - name: Install Stylelint ${{ matrix.stylelint-version }}
         continue-on-error: true
+        working-directory: ${{ steps.repo-info.outputs.directory }}
         run: npm install --no-audit --no-save ${{ matrix.stylelint-version }}
 
       - name: Run test
         continue-on-error: true
+        working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE: ${{ matrix.package }}
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
