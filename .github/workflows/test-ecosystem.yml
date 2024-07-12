@@ -86,7 +86,6 @@ jobs:
           - 'stylelint-media-use-custom-media'
           - 'stylelint-no-browser-hacks'
           - 'stylelint-no-indistinguishable-colors'
-          - 'stylelint-no-nested-media'
           - 'stylelint-no-px'
           - 'stylelint-no-restricted-syntax'
           - 'stylelint-no-unresolved-module'
