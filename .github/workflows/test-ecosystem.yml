@@ -32,7 +32,6 @@ jobs:
           - '@csstools/stylelint-at-risk'
           - '@csstools/stylelint-no-at-nest-rule'
           - '@csstools/stylelint-no-invalid-at-import-rules-when-bundling'
-          - '@design-systems/stylelint-config'
           - '@double-great/stylelint-a11y'
           - '@jetbrains/stylelint-config'
           - '@mediamonks/stylelint-config'
