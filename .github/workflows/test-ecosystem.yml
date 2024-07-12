@@ -33,7 +33,6 @@ jobs:
           - '@csstools/stylelint-no-at-nest-rule'
           - '@csstools/stylelint-no-invalid-at-import-rules-when-bundling'
           - '@double-great/stylelint-a11y'
-          - '@jetbrains/stylelint-config'
           - '@mediamonks/stylelint-config'
           - '@namics/stylelint-bem'
           - '@o3r/stylelint-plugin'
