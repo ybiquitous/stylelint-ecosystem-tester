@@ -48,7 +48,6 @@ jobs:
           - '@wemake-services/stylelint-config-scss'
           - '@wordpress/stylelint-config'
           - 'stylelint-8-point-grid'
-          - 'stylelint-config-airbnb'
           - 'stylelint-config-ali'
           - 'stylelint-config-astro'
           - 'stylelint-config-bod'
