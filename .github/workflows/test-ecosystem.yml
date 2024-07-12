@@ -42,7 +42,6 @@ jobs:
           - '@stylistic/stylelint-plugin'
           - '@wordpress/stylelint-config'
           - 'stylelint-browser-compat'
-          - 'stylelint-color-format'
           - 'stylelint-config-ali'
           - 'stylelint-config-astro'
           - 'stylelint-config-bod'
