@@ -216,6 +216,7 @@ jobs:
         run: |
           if npm install --no-audit --no-save "${STYLELINT_VERSION}"; then
             echo "passed=true" >> "${GITHUB_OUTPUT}"
+            npm ls stylelint
           else
             echo "::error ::The Stylelint (${STYLELINT_VERSION}) installation failed. Visit ${PACKAGE_URL}"
           fi
