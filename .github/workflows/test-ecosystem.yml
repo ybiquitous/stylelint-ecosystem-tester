@@ -29,25 +29,36 @@ jobs:
         #
         package:
           # In alphabetical order
-          ## Configs
           - '@1024pix/stylelint-config-rational-order'
           - '@10up/stylelint-config'
           - '@bandlab/stylelint-config-bandlab'
           - '@cerner/stylelint-config-terra'
+          - '@csstools/stylelint-at-risk'
+          - '@csstools/stylelint-no-at-nest-rule'
+          - '@csstools/stylelint-no-invalid-at-import-rules-when-bundling'
           - '@design-systems/stylelint-config'
+          - '@double-great/stylelint-a11y'
           - '@groww-tech/stylelint-config'
           - '@hedgehoglab/stylelint-config-basic'
           - '@hedgehoglab/stylelint-config-scss'
           - '@jetbrains/stylelint-config'
           - '@mediamonks/stylelint-config'
+          - '@namics/stylelint-bem'
+          - '@o3r/stylelint-plugin'
           - '@primer/stylelint-config'
           - '@pro-vision/stylelint-config-pv'
+          - '@ronilaukkarinen/stylelint-a11y'
+          - '@shopify/stylelint-plugin'
           - '@so1ve/stylelint-config-basic'
           - '@springernature/stylelint-config'
           - '@stylistic/stylelint-config'
+          - '@stylistic/stylelint-plugin'
           - '@wemake-services/stylelint-config-scss'
           - '@wordpress/stylelint-config'
           - 'stylelint-8-point-grid'
+          - 'stylelint-a11y'
+          - 'stylelint-browser-compat'
+          - 'stylelint-color-format'
           - 'stylelint-config-ali'
           - 'stylelint-config-astro'
           - 'stylelint-config-bod'
@@ -84,30 +95,11 @@ jobs:
           - 'stylelint-config-wikimedia'
           - 'stylelint-config-xo'
           - 'stylelint-config-xo-scss'
-          - 'stylelint-define-config'
-          - 'stylelint-rscss'
-          - 'stylelint-semantic-groups'
-          ## Plugins
-          - '@1024pix/stylelint-config-rational-order'
-          - '@csstools/stylelint-at-risk'
-          - '@csstools/stylelint-no-at-nest-rule'
-          - '@csstools/stylelint-no-invalid-at-import-rules-when-bundling'
-          - '@double-great/stylelint-a11y'
-          - '@namics/stylelint-bem'
-          - '@o3r/stylelint-plugin'
-          - '@ronilaukkarinen/stylelint-a11y'
-          - '@shopify/stylelint-plugin'
-          - '@stylistic/stylelint-plugin'
-          - 'stylelint-8-point-grid'
-          - 'stylelint-a11y'
-          - 'stylelint-browser-compat'
-          - 'stylelint-color-format'
-          - 'stylelint-config-rational-order'
-          - 'stylelint-config-rational-order-fix'
           - 'stylelint-csstree-validator'
           - 'stylelint-declaration-block-no-ignored-properties'
           - 'stylelint-declaration-strict-value'
           - 'stylelint-declaration-use-variable'
+          - 'stylelint-define-config'
           - 'stylelint-file-max-lines'
           - 'stylelint-gamut'
           - 'stylelint-group-selectors'
@@ -170,12 +162,17 @@ jobs:
           echo "Directory: ${directory}"
           echo "directory=${directory}" >> "${GITHUB_OUTPUT}"
 
-          # TODO: Add repo info to https://github.com/3846masa/stylelint-browser-compat
-          if [[ "${url}" == 'null' ]]; then
-            echo "::warning ::The repository info is missing. Visit https://github.com/3846masa/stylelint-browser-compat"
-            echo "url=https://github.com/3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
-            echo "fullname=3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
-          fi
+          case "${PACKAGE}" in
+            stylelint-browser-compat)
+              echo "::warning ::The repository info is missing. Visit https://github.com/3846masa/stylelint-browser-compat"
+              echo "url=https://github.com/3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
+              echo "fullname=3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
+              ;;
+            stylelint-config-ali)
+              echo "::warning ::The repository directory is missing. Visit ${url}"
+              echo "directory=packages/stylelint-config-ali" >> "${GITHUB_OUTPUT}"
+              ;;
+          esac
 
       - name: Checkout ${{ steps.repo-info.outputs.fullname }}
         uses: actions/checkout@v4
