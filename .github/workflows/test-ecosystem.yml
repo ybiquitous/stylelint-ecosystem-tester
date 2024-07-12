@@ -90,7 +90,6 @@ jobs:
           - 'stylelint-no-restricted-syntax'
           - 'stylelint-no-unresolved-module'
           - 'stylelint-no-unsupported-browser-features'
-          - 'stylelint-no-unused-selectors'
           - 'stylelint-number-z-index-constraint'
           - 'stylelint-order'
           - 'stylelint-performance-animation'
