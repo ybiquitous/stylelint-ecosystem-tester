@@ -35,7 +35,6 @@ jobs:
           - '@stylistic/stylelint-plugin'
           - 'stylelint-8-point-grid'
           - 'stylelint-a11y'
-          - 'stylelint-at-rule-no-children'
           - 'stylelint-browser-compat'
           - 'stylelint-color-format'
           - 'stylelint-config-rational-order'
