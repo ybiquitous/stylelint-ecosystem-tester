@@ -85,7 +85,6 @@ jobs:
           - 'stylelint-config-wikimedia'
           - 'stylelint-config-xo'
           - 'stylelint-config-xo-scss'
-          - 'stylelint-config-za'
           - 'stylelint-define-config'
           - 'stylelint-rscss'
           - 'stylelint-semantic-groups'
