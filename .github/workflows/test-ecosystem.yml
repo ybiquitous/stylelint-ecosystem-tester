@@ -141,6 +141,7 @@ jobs:
           echo "yarn: $(yarn --version)"
 
       - name: Install dependencies
+        id: install-dependencies
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE: ${{ matrix.package }}
@@ -148,10 +149,12 @@ jobs:
         run: |
           if ! npm install --no-audit; then
             echo "::error title=${PACKAGE}::The dependency installation failed. Visit ${PACKAGE_URL}"
-            exit 1
+            echo "failed=true" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Install Stylelint ${{ matrix.stylelint-version }}
+        id: install-stylelint
+        if: ${{ !steps.install-dependencies.outputs.failed }}
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           STYLELINT_VERSION: ${{ matrix.stylelint-version }}
@@ -160,10 +163,12 @@ jobs:
         run: |
           if ! npm install --no-audit --no-save "${STYLELINT_VERSION}"; then
             echo "::error title=${PACKAGE}::The Stylelint (${STYLELINT_VERSION}) installation failed. Visit ${PACKAGE_URL}"
-            exit 1
+            echo "failed=true" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Run build
+        id: build
+        if: ${{ !steps.install-stylelint.outputs.failed }}
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE: ${{ matrix.package }}
@@ -171,10 +176,12 @@ jobs:
         run: |
           if ! npm run build --if-present; then
             echo "::error title=${PACKAGE}::The build failed. Visit ${PACKAGE_URL}"
-            exit 1
+            echo "failed=true" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Run test
+        id: test
+        if: ${{ !steps.build.outputs.failed }}
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE: ${{ matrix.package }}
@@ -182,5 +189,5 @@ jobs:
         run: |
           if ! npm test; then
             echo "::error title=${PACKAGE}::The test failed. Visit ${PACKAGE_URL}"
-            exit 1
+            echo "failed=true" >> "${GITHUB_OUTPUT}"
           fi
