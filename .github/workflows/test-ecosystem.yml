@@ -27,8 +27,10 @@ jobs:
         package:
           # In alphabetical order
           - '@1024pix/stylelint-config-rational-order'
+          - '@csstools/stylelint-at-risk'
+          - '@csstools/stylelint-no-at-nest-rule'
+          - '@csstools/stylelint-no-invalid-at-import-rules-when-bundling'
           - '@double-great/stylelint-a11y'
-          - '@mozaic-ds/stylelint-plugin-mozaic'
           - '@namics/stylelint-bem'
           - '@o3r/stylelint-plugin'
           - '@ronilaukkarinen/stylelint-a11y'
@@ -36,7 +38,6 @@ jobs:
           - '@stylistic/stylelint-plugin'
           - 'stylelint-8-point-grid'
           - 'stylelint-a11y'
-          - 'stylelint-at-rule-no-children'
           - 'stylelint-browser-compat'
           - 'stylelint-color-format'
           - 'stylelint-config-rational-order'
@@ -95,16 +96,25 @@ jobs:
         env:
           PACKAGE: ${{ matrix.package }}
         run: |
-          raw_url=$(npm view "${PACKAGE}" 'repository.url')
-
-          fullname=$(echo "${raw_url}" | sed -E 's/.*github.com\/([^/]+\/[^/]+)\.git$/\1/')
-          echo "fullname=${fullname}" >> "${GITHUB_OUTPUT}"
-
-          url=$(echo "${raw_url}" | sed -E 's/^git\+//' | sed -E 's/\.git$//' | sed -E 's/^git:/https:/')
+          url=$(npm repo --browser=false --json "${PACKAGE}" | jq -r '.url')
           echo "URL: ${url}"
           echo "url=${url}" >> "${GITHUB_OUTPUT}"
 
-      - name: Checkout ${{ steps.repo-info.outputs.url }}
+          fullname=$(echo "${url}" | sed -E 's/.*github.com\/([^/]+\/[^/]+).*/\1/')
+          echo "Fullname: ${fullname}"
+          echo "fullname=${fullname}" >> "${GITHUB_OUTPUT}"
+
+          directory=$(npm view "${PACKAGE}" 'repository.directory')
+          echo "Directory: ${directory}"
+          echo "directory=${directory}" >> "${GITHUB_OUTPUT}"
+
+          # TODO: Add repo info to https://github.com/3846masa/stylelint-browser-compat
+          if [[ "${url}" == 'null' ]]; then
+            echo "url=https://github.com/3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
+            echo "fullname=3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Checkout ${{ steps.repo-info.outputs.fullname }}
         uses: actions/checkout@v4
         with:
           repository: ${{ steps.repo-info.outputs.fullname }}
@@ -131,14 +141,17 @@ jobs:
 
       - name: Install dependencies
         continue-on-error: true
+        working-directory: ${{ steps.repo-info.outputs.directory }}
         run: npm install --no-audit
 
       - name: Install Stylelint ${{ matrix.stylelint-version }}
         continue-on-error: true
+        working-directory: ${{ steps.repo-info.outputs.directory }}
         run: npm install --no-audit --no-save ${{ matrix.stylelint-version }}
 
       - name: Run test
         continue-on-error: true
+        working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE: ${{ matrix.package }}
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
