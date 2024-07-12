@@ -35,7 +35,6 @@ jobs:
           - '@bandlab/stylelint-config-bandlab'
           - '@cerner/stylelint-config-terra'
           - '@design-systems/stylelint-config'
-          - '@gitlab/stylelint-config'
           - '@groww-tech/stylelint-config'
           - '@hedgehoglab/stylelint-config-basic'
           - '@hedgehoglab/stylelint-config-scss'
