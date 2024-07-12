@@ -28,7 +28,6 @@ jobs:
           # In alphabetical order
           - '@1024pix/stylelint-config-rational-order'
           - '@double-great/stylelint-a11y'
-          - '@mozaic-ds/stylelint-plugin-mozaic'
           - '@namics/stylelint-bem'
           - '@o3r/stylelint-plugin'
           - '@ronilaukkarinen/stylelint-a11y'
