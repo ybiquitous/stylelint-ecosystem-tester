@@ -53,8 +53,6 @@ jobs:
           - '@stylistic/stylelint-plugin'
           - '@wemake-services/stylelint-config-scss'
           - '@wordpress/stylelint-config'
-          - 'stylelint-8-point-grid'
-          - 'stylelint-a11y'
           - 'stylelint-browser-compat'
           - 'stylelint-color-format'
           - 'stylelint-config-ali'
