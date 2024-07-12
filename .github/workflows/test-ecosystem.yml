@@ -31,7 +31,6 @@ jobs:
           # In alphabetical order
           - '@1024pix/stylelint-config-rational-order'
           - '@10up/stylelint-config'
-          - '@bandlab/stylelint-config-bandlab'
           - '@cerner/stylelint-config-terra'
           - '@csstools/stylelint-at-risk'
           - '@csstools/stylelint-no-at-nest-rule'
