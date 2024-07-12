@@ -97,7 +97,6 @@ jobs:
           - 'stylelint-group-selectors'
           - 'stylelint-high-performance-animation'
           - 'stylelint-less'
-          - 'stylelint-max-lines'
           - 'stylelint-media-use-custom-media'
           - 'stylelint-no-browser-hacks'
           - 'stylelint-no-indistinguishable-colors'
