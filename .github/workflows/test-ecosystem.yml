@@ -135,6 +135,7 @@ jobs:
       - name: Run test
         continue-on-error: true
         env:
+          PACKAGE: ${{ matrix.package }}
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
           npm test || echo "::error title=${PACKAGE}::The test failed. Visit ${PACKAGE_URL}."
