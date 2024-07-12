@@ -30,7 +30,6 @@ jobs:
         package:
           # In alphabetical order
           - '@1024pix/stylelint-config-rational-order'
-          - '@cerner/stylelint-config-terra'
           - '@csstools/stylelint-at-risk'
           - '@csstools/stylelint-no-at-nest-rule'
           - '@csstools/stylelint-no-invalid-at-import-rules-when-bundling'
