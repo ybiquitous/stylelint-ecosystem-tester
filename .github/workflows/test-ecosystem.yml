@@ -38,7 +38,6 @@ jobs:
           - '@pro-vision/stylelint-config-pv'
           - '@ronilaukkarinen/stylelint-a11y'
           - '@shopify/stylelint-plugin'
-          - '@so1ve/stylelint-config-basic'
           - '@springernature/stylelint-config'
           - '@stylistic/stylelint-config'
           - '@stylistic/stylelint-plugin'
