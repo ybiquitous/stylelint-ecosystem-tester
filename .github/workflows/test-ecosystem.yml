@@ -34,7 +34,6 @@ jobs:
           - '@csstools/stylelint-no-invalid-at-import-rules-when-bundling'
           - '@design-systems/stylelint-config'
           - '@double-great/stylelint-a11y'
-          - '@groww-tech/stylelint-config'
           - '@jetbrains/stylelint-config'
           - '@mediamonks/stylelint-config'
           - '@namics/stylelint-bem'
