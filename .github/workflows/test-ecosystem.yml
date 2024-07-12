@@ -100,7 +100,7 @@ jobs:
           fullname=$(echo "${raw_url}" | sed -E 's/.*github.com\/([^/]+\/[^/]+)\.git$/\1/')
           echo "fullname=${fullname}" >> "${GITHUB_OUTPUT}"
 
-          url=$(echo "${raw_url}" | sed -E 's/^git\+(.+)\.git$/\1/')
+          url=$(echo "${raw_url}" | sed -E 's/^git\+//' | sed -E 's/\.git$//' | sed -E 's/^git:/https:/')
           echo "URL: ${url}"
           echo "url=${url}" >> "${GITHUB_OUTPUT}"
 
