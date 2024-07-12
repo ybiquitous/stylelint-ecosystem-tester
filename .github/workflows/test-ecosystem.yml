@@ -146,44 +146,46 @@ jobs:
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
-          if ! npm install --no-audit; then
+          if npm install --no-audit; then
+            echo "passed=true" >> "${GITHUB_OUTPUT}"
+          else
             echo "::error ::The dependency installation failed. Visit ${PACKAGE_URL}"
-            echo "failed=true" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Install Stylelint ${{ matrix.stylelint-version }}
         id: install-stylelint
-        if: ${{ !steps.install-dependencies.outputs.failed }}
+        if: ${{ steps.install-dependencies.outputs.passed }}
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           STYLELINT_VERSION: ${{ matrix.stylelint-version }}
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
-          if ! npm install --no-audit --no-save "${STYLELINT_VERSION}"; then
+          if npm install --no-audit --no-save "${STYLELINT_VERSION}"; then
+            echo "passed=true" >> "${GITHUB_OUTPUT}"
+          else
             echo "::error ::The Stylelint (${STYLELINT_VERSION}) installation failed. Visit ${PACKAGE_URL}"
-            echo "failed=true" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Run build
         id: build
-        if: ${{ !steps.install-stylelint.outputs.failed }}
+        if: ${{ steps.install-dependencies.outputs.passed && steps.install-stylelint.outputs.passed }}
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
-          if ! npm run build --if-present; then
+          if npm run build --if-present; then
+            echo "passed=true" >> "${GITHUB_OUTPUT}"
+          else
             echo "::error ::The build failed. Visit ${PACKAGE_URL}"
-            echo "failed=true" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Run test
         id: test
-        if: ${{ !steps.build.outputs.failed }}
+        if: ${{ steps.install-dependencies.outputs.passed && steps.install-stylelint.outputs.passed && steps.build.outputs.passed }}
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
           if ! npm test; then
             echo "::error ::The test failed. Visit ${PACKAGE_URL}"
-            echo "failed=true" >> "${GITHUB_OUTPUT}"
           fi
