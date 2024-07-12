@@ -175,6 +175,7 @@ jobs:
 
           # TODO: Add repo info to https://github.com/3846masa/stylelint-browser-compat
           if [[ "${url}" == 'null' ]]; then
+            echo "::warning ::The repository info is missing. Visit https://github.com/3846masa/stylelint-browser-compat"
             echo "url=https://github.com/3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
             echo "fullname=3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
           fi
@@ -205,20 +206,51 @@ jobs:
           echo "yarn: $(yarn --version)"
 
       - name: Install dependencies
-        continue-on-error: true
-        working-directory: ${{ steps.repo-info.outputs.directory }}
-        run: npm install --no-audit
-
-      - name: Install Stylelint ${{ matrix.stylelint-version }}
-        continue-on-error: true
-        working-directory: ${{ steps.repo-info.outputs.directory }}
-        run: npm install --no-audit --no-save ${{ matrix.stylelint-version }}
-
-      - name: Run test
-        continue-on-error: true
+        id: install-dependencies
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
-          PACKAGE: ${{ matrix.package }}
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
-          npm test || echo "::error title=${PACKAGE}::The test failed. Visit ${PACKAGE_URL}"
+          if npm install --no-audit; then
+            echo "passed=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "::error ::The dependency installation failed. Visit ${PACKAGE_URL}"
+          fi
+
+      - name: Install Stylelint ${{ matrix.stylelint-version }}
+        id: install-stylelint
+        if: ${{ steps.install-dependencies.outputs.passed }}
+        working-directory: ${{ steps.repo-info.outputs.directory }}
+        env:
+          STYLELINT_VERSION: ${{ matrix.stylelint-version }}
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: |
+          if npm install --no-audit --no-save "${STYLELINT_VERSION}"; then
+            echo "passed=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "::error ::The Stylelint (${STYLELINT_VERSION}) installation failed. Visit ${PACKAGE_URL}"
+          fi
+
+      - name: Run build
+        id: build
+        if: ${{ steps.install-dependencies.outputs.passed && steps.install-stylelint.outputs.passed }}
+        working-directory: ${{ steps.repo-info.outputs.directory }}
+        env:
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: |
+          if npm run build --if-present; then
+            echo "passed=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "::error ::The build failed. Visit ${PACKAGE_URL}"
+          fi
+
+      - name: Run test
+        id: test
+        if: ${{ steps.install-dependencies.outputs.passed && steps.install-stylelint.outputs.passed && steps.build.outputs.passed }}
+        working-directory: ${{ steps.repo-info.outputs.directory }}
+        env:
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: |
+          if ! npm test; then
+            echo "::error ::The test failed. Visit ${PACKAGE_URL}"
+          fi
