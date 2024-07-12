@@ -132,3 +132,10 @@ jobs:
 
       - name: Run test
         run: npm test
+
+      - name: Show error if failed
+        if: ${{ failure() }}
+        env:
+          PACKAGE: ${{ matrix.package }}
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: echo "::error title=${PACKAGE}::The test for ${PACKAGE} failed. See also ${PACKAGE_URL}."
