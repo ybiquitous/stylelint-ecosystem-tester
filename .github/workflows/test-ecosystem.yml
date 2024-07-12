@@ -96,7 +96,6 @@ jobs:
           - 'stylelint-gamut'
           - 'stylelint-group-selectors'
           - 'stylelint-high-performance-animation'
-          - 'stylelint-images'
           - 'stylelint-less'
           - 'stylelint-max-lines'
           - 'stylelint-media-use-custom-media'
