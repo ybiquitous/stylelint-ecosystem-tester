@@ -135,6 +135,7 @@ jobs:
 
       - name: Show error if failed
         if: ${{ failure() }}
+        continue-on-error: true
         env:
           PACKAGE: ${{ matrix.package }}
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
