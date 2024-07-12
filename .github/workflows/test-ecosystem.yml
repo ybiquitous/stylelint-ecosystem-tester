@@ -109,7 +109,7 @@ jobs:
           echo "directory=${directory}" >> "${GITHUB_OUTPUT}"
 
           # TODO: Add repo info to https://github.com/3846masa/stylelint-browser-compat
-          if [[ -z "${url}" ]]; then
+          if [[ "${url}" == 'null' ]]; then
             echo "url=https://github.com/3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
             echo "fullname=3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
           fi
