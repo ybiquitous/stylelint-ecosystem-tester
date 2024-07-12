@@ -90,7 +90,6 @@ jobs:
           - 'stylelint-csstree-validator'
           - 'stylelint-declaration-block-no-ignored-properties'
           - 'stylelint-declaration-strict-value'
-          - 'stylelint-declaration-use-variable'
           - 'stylelint-define-config'
           - 'stylelint-file-max-lines'
           - 'stylelint-gamut'
