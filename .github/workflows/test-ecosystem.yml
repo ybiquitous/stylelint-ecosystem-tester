@@ -34,7 +34,6 @@ jobs:
           - '@csstools/stylelint-no-invalid-at-import-rules-when-bundling'
           - '@double-great/stylelint-a11y'
           - '@namics/stylelint-bem'
-          - '@o3r/stylelint-plugin'
           - '@primer/stylelint-config'
           - '@pro-vision/stylelint-config-pv'
           - '@ronilaukkarinen/stylelint-a11y'
