@@ -125,10 +125,17 @@ jobs:
           echo "pnpm: $(pnpm --version)"
 
       - name: Install dependencies
+        continue-on-error: true
         run: npm install --no-audit
 
       - name: Install Stylelint ${{ matrix.stylelint-version }}
+        continue-on-error: true
         run: npm install --no-audit --no-save ${{ matrix.stylelint-version }}
 
       - name: Run test
-        run: npm test
+        continue-on-error: true
+        env:
+          PACKAGE: ${{ matrix.package }}
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: |
+          npm test || echo "::error title=${PACKAGE}::The test failed. Visit ${PACKAGE_URL}."
