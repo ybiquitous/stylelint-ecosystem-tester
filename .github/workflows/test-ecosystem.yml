@@ -27,6 +27,9 @@ jobs:
         package:
           # In alphabetical order
           - '@1024pix/stylelint-config-rational-order'
+          - '@csstools/stylelint-at-risk'
+          - '@csstools/stylelint-no-at-nest-rule'
+          - '@csstools/stylelint-no-invalid-at-import-rules-when-bundling'
           - '@double-great/stylelint-a11y'
           - '@namics/stylelint-bem'
           - '@o3r/stylelint-plugin'
