@@ -11,8 +11,7 @@ To see test results, visit the [Actions page](https://github.com/ybiquitous/styl
 
 An eligible package should meet the following criteria:
 
-- Its latest version was published within three years
-- And, top 20 most popular packages in the following categories:
+- Top 20 most popular packages in the following categories:
   - Plugins -- including `stylelint-plugin` keyword
   - Configurations -- including `stylelint-config` keyword
   - Formatters -- including `stylelint-formatter` keyword
