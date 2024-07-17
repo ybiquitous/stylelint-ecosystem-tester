@@ -19,14 +19,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Based on the following search results:
-        # - https://www.npmjs.com/search?q=keywords%3Astylelint-config&ranking=popularity
-        # - https://www.npmjs.com/search?q=keywords%3Astylelint-plugin&ranking=popularity
-        #
-        # The following snippet on a browser dev console may be helpful to create this list.
-        #
-        #     [...document.querySelectorAll('a[href^="/package"][target="_self"]')].map(a => a.href.replace(/.+\/package\/(.+)$/, "- '$1'")).sort().join("\n")
-        #
         package:
           # In alphabetical order
           - '@csstools/stylelint-at-risk'
