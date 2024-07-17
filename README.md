@@ -30,4 +30,4 @@ npm search --searchopts='sortBy=popularity' --searchlimit=20 'keywords:stylelint
 
 ## Contributing
 
-To add your package to this test suite, edit the [CI workflow file](.github/workflows/test-ecosystem.yml) and open a pull request.
+Read the [contributing guide](CONTRIBUTING.md).
