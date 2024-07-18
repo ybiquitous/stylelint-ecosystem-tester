@@ -29,4 +29,4 @@ npm search --searchopts='sortBy=popularity' --searchlimit=20 'keywords:stylelint
 
 ## Contributing
 
-Read the [contributing guide](CONTRIBUTING.md).
+Please read the [contributing guidelines](CONTRIBUTING.md).
