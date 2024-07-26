@@ -82,16 +82,25 @@ An eligible package should meet the following criteria:
   - Formatters -- including `stylelint-formatter` keyword
 - Or, acknowledged as exceptionally important
 
-The `npm view` and `npm search` commands can help us find such a package:
-
-```shell
-npm view <your_package>
-
-npm search --searchopts='sortBy=popularity' --searchlimit=20 'keywords:stylelint-plugin' <your_package>
-npm search --searchopts='sortBy=popularity' --searchlimit=20 'keywords:stylelint-config' <your_package>
-npm search --searchopts='sortBy=popularity' --searchlimit=20 'keywords:stylelint-formatter' <your_package>
-```
+> [!TIP]
+> The `npm view` and `npm search` commands can help us find such a package:
+>
+> ```shell
+> npm view <your_package>
+> ```
+>
+> ```shell
+> npm search --searchopts='sortBy=popularity' --searchlimit=20 'keywords:stylelint-plugin'
+> ```
+>
+> ```shell
+> npm search --searchopts='sortBy=popularity' --searchlimit=20 'keywords:stylelint-config'
+> ```
+>
+> ```shell
+> npm search --searchopts='sortBy=popularity' --searchlimit=20 'keywords:stylelint-formatter'
+> ```
 
 ## Contributing
 
-Please read the [contributing guidelines](CONTRIBUTING.md).
+We welcome issues or pull requests. Please read the [contributing guidelines](CONTRIBUTING.md) for details.
