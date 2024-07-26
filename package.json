@@ -8,16 +8,18 @@
   "repository": "ybiquitous/stylelint-ecosystem-tester",
   "license": "MIT",
   "author": "Masafumi Koba",
+  "type": "module",
   "scripts": {
     "format": "prettier --write .",
     "lint": "npm run lint:formatting && npm run lint:md",
     "lint:formatting": "prettier --check .",
     "lint:md": "remark . --quiet --frail",
     "prepare": "husky",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "update-readme": "node scripts/update-readme.js"
   },
   "lint-staged": {
-    "*.{json,md,yaml,yml}": "prettier --write"
+    "*.{js,json,md,yaml,yml}": "prettier --write"
   },
   "prettier": "@stylelint/prettier-config",
   "remarkConfig": {
@@ -28,10 +30,11 @@
   "devDependencies": {
     "@stylelint/prettier-config": "^3.0.0",
     "@stylelint/remark-preset": "^5.1.1",
-    "husky": "^9.0.11",
+    "husky": "^9.1.2",
     "lint-staged": "^15.2.7",
-    "prettier": "^3.3.2",
-    "remark-cli": "^12.0.1"
+    "prettier": "^3.3.3",
+    "remark-cli": "^12.0.1",
+    "yaml": "^2.5.0"
   },
   "engines": {
     "node": ">=20"
