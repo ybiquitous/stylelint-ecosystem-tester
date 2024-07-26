@@ -37,10 +37,8 @@ jobs:
           - '@stylistic/stylelint-plugin'
           - '@wordpress/stylelint-config'
           - 'stylelint-actions-formatters'
-          - 'stylelint-browser-compat'
           - 'stylelint-checkstyle-reporter'
           - 'stylelint-codeframe-formatter'
-          - 'stylelint-config-ali'
           - 'stylelint-config-astro'
           - 'stylelint-config-bod'
           - 'stylelint-config-clean-order'
@@ -134,18 +132,6 @@ jobs:
           directory=$(npm view "${PACKAGE}" 'repository.directory')
           echo "Directory: ${directory}"
           echo "directory=${directory}" >> "${GITHUB_OUTPUT}"
-
-          case "${PACKAGE}" in
-            stylelint-browser-compat)
-              echo "::warning ::The repository info is missing. Visit https://github.com/3846masa/stylelint-browser-compat"
-              echo "url=https://github.com/3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
-              echo "fullname=3846masa/stylelint-browser-compat" >> "${GITHUB_OUTPUT}"
-              ;;
-            stylelint-config-ali)
-              echo "::warning ::The repository directory is missing. Visit ${url}"
-              echo "directory=packages/stylelint-config-ali" >> "${GITHUB_OUTPUT}"
-              ;;
-          esac
 
       - name: Checkout ${{ steps.repo-info.outputs.fullname }}
         uses: actions/checkout@v4
