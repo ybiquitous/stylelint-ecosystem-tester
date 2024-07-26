@@ -16,7 +16,7 @@ To see test results, visit the [Actions page](https://github.com/ybiquitous/styl
 | [@primer/stylelint-config](https://www.npmjs.com/package/@primer/stylelint-config)                                                   |   ✅   |
 | [@shopify/stylelint-plugin](https://www.npmjs.com/package/@shopify/stylelint-plugin)                                                 |   ❌   |
 | [@stylistic/stylelint-config](https://www.npmjs.com/package/@stylistic/stylelint-config)                                             |   ❌   |
-| [@stylistic/stylelint-plugin](https://www.npmjs.com/package/@stylistic/stylelint-plugin)                                             |   ❌   |
+| [@stylistic/stylelint-plugin](https://www.npmjs.com/package/@stylistic/stylelint-plugin)                                             |   ✅   |
 | [@wordpress/stylelint-config](https://www.npmjs.com/package/@wordpress/stylelint-config)                                             |   ❌   |
 | [stylelint-actions-formatters](https://www.npmjs.com/package/stylelint-actions-formatters)                                           |   ✅   |
 | [stylelint-checkstyle-reporter](https://www.npmjs.com/package/stylelint-checkstyle-reporter)                                         |   ✅   |
@@ -29,7 +29,7 @@ To see test results, visit the [Actions page](https://github.com/ybiquitous/styl
 | [stylelint-config-rational-order](https://www.npmjs.com/package/stylelint-config-rational-order)                                     |   ❌   |
 | [stylelint-config-recess-order](https://www.npmjs.com/package/stylelint-config-recess-order)                                         |   ✅   |
 | [stylelint-config-recommended](https://www.npmjs.com/package/stylelint-config-recommended)                                           |   ✅   |
-| [stylelint-config-recommended-less](https://www.npmjs.com/package/stylelint-config-recommended-less)                                 |   ✅   |
+| [stylelint-config-recommended-less](https://www.npmjs.com/package/stylelint-config-recommended-less)                                 |   ❌   |
 | [stylelint-config-recommended-scss](https://www.npmjs.com/package/stylelint-config-recommended-scss)                                 |   ✅   |
 | [stylelint-config-recommended-vue](https://www.npmjs.com/package/stylelint-config-recommended-vue)                                   |   ✅   |
 | [stylelint-config-sass-guidelines](https://www.npmjs.com/package/stylelint-config-sass-guidelines)                                   |   ✅   |
@@ -37,14 +37,14 @@ To see test results, visit the [Actions page](https://github.com/ybiquitous/styl
 | [stylelint-config-standard-scss](https://www.npmjs.com/package/stylelint-config-standard-scss)                                       |   ✅   |
 | [stylelint-config-standard-vue](https://www.npmjs.com/package/stylelint-config-standard-vue)                                         |   ❌   |
 | [stylelint-config-suitcss](https://www.npmjs.com/package/stylelint-config-suitcss)                                                   |   ✅   |
-| [stylelint-config-tailwindcss](https://www.npmjs.com/package/stylelint-config-tailwindcss)                                           |   ✅   |
+| [stylelint-config-tailwindcss](https://www.npmjs.com/package/stylelint-config-tailwindcss)                                           |   ❌   |
 | [stylelint-config-twbs-bootstrap](https://www.npmjs.com/package/stylelint-config-twbs-bootstrap)                                     |   ✅   |
-| [stylelint-config-wikimedia](https://www.npmjs.com/package/stylelint-config-wikimedia)                                               |   ✅   |
+| [stylelint-config-wikimedia](https://www.npmjs.com/package/stylelint-config-wikimedia)                                               |   ❌   |
 | [stylelint-config-xo](https://www.npmjs.com/package/stylelint-config-xo)                                                             |   ✅   |
 | [stylelint-config-xo-scss](https://www.npmjs.com/package/stylelint-config-xo-scss)                                                   |   ✅   |
-| [stylelint-csstree-validator](https://www.npmjs.com/package/stylelint-csstree-validator)                                             |   ✅   |
+| [stylelint-csstree-validator](https://www.npmjs.com/package/stylelint-csstree-validator)                                             |   ❌   |
 | [stylelint-declaration-block-no-ignored-properties](https://www.npmjs.com/package/stylelint-declaration-block-no-ignored-properties) |   ✅   |
-| [stylelint-declaration-strict-value](https://www.npmjs.com/package/stylelint-declaration-strict-value)                               |   ✅   |
+| [stylelint-declaration-strict-value](https://www.npmjs.com/package/stylelint-declaration-strict-value)                               |   ❌   |
 | [stylelint-formatter-pretty](https://www.npmjs.com/package/stylelint-formatter-pretty)                                               |   ✅   |
 | [stylelint-high-performance-animation](https://www.npmjs.com/package/stylelint-high-performance-animation)                           |   ✅   |
 | [stylelint-less](https://www.npmjs.com/package/stylelint-less)                                                                       |   ✅   |
@@ -59,10 +59,10 @@ To see test results, visit the [Actions page](https://github.com/ybiquitous/styl
 | [stylelint-scss](https://www.npmjs.com/package/stylelint-scss)                                                                       |   ✅   |
 | [stylelint-selector-bem-pattern](https://www.npmjs.com/package/stylelint-selector-bem-pattern)                                       |   ✅   |
 | [stylelint-stylus](https://www.npmjs.com/package/stylelint-stylus)                                                                   |   ✅   |
-| [stylelint-suitcss](https://www.npmjs.com/package/stylelint-suitcss)                                                                 |   ✅   |
+| [stylelint-suitcss](https://www.npmjs.com/package/stylelint-suitcss)                                                                 |   ❌   |
 | [stylelint-use-logical](https://www.npmjs.com/package/stylelint-use-logical)                                                         |   ✅   |
 | [stylelint-use-logical-spec](https://www.npmjs.com/package/stylelint-use-logical-spec)                                               |   ✅   |
-| [stylelint-use-nesting](https://www.npmjs.com/package/stylelint-use-nesting)                                                         |   ✅   |
+| [stylelint-use-nesting](https://www.npmjs.com/package/stylelint-use-nesting)                                                         |   ❌   |
 | [stylelint-value-no-unknown-custom-properties](https://www.npmjs.com/package/stylelint-value-no-unknown-custom-properties)           |   ✅   |
 
 Total 51 packages

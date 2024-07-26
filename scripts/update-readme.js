@@ -7,12 +7,30 @@ const workflowFile = new URL('../.github/workflows/test-ecosystem.yml', import.m
 const workflowContent = readFileSync(workflowFile, 'utf8');
 const packages = parse(workflowContent).jobs.test.strategy.matrix.package;
 
+const failedPackages = new Set([
+	'@shopify/stylelint-plugin',
+	'@wordpress/stylelint-config',
+	'stylelint-codeframe-formatter',
+	'stylelint-codeframe-formatter',
+	'stylelint-config-rational-order',
+	'stylelint-config-recommended-less',
+	'stylelint-config-standard-vue',
+	'stylelint-config-tailwindcss',
+	'stylelint-config-wikimedia',
+	'stylelint-csstree-validator',
+	'stylelint-declaration-strict-value',
+	'stylelint-suitcss',
+	'stylelint-use-nesting',
+	'@stylistic/stylelint-config',
+]);
+
 const newPackageLines = [];
 newPackageLines.push('| Package | Status |');
 newPackageLines.push('| :------ | :----: |');
 
 for (const pkg of packages) {
-	newPackageLines.push(`| [${pkg}](https://www.npmjs.com/package/${pkg}) | ✅ |`);
+	const statusEmoji = failedPackages.has(pkg) ? '❌' : '✅';
+	newPackageLines.push(`| [${pkg}](https://www.npmjs.com/package/${pkg}) | ${statusEmoji} |`);
 }
 
 newPackageLines.push('');
