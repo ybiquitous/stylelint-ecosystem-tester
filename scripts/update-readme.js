@@ -25,6 +25,6 @@ const endLineIndex = readmeLines.indexOf('<!-- END:PACKAGES -->');
 
 readmeLines.splice(startLineIndex + 1, endLineIndex - startLineIndex - 1, ...newPackageLines);
 
-writeFileSync(readmeFile, readmeLines.join('\n') + '\n', 'utf8');
+writeFileSync(readmeFile, readmeLines.join('\n'), 'utf8');
 
 execSync(`npx prettier --write "${fileURLToPath(readmeFile)}"`);
