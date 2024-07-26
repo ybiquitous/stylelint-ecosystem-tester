@@ -1,13 +1,24 @@
 {
   "name": "stylelint-ecosystem-tester",
   "version": "0.0.0",
+  "private": true,
   "description": "A comprehensive test suite for Stylelint ecosystem.",
   "keywords": [
     "stylelint"
   ],
-  "repository": "ybiquitous/stylelint-ecosystem-tester",
+  "repository": "stylelint/stylelint-ecosystem-tester",
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/stylelint"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/stylelint"
+    }
+  ],
   "license": "MIT",
-  "author": "Masafumi Koba",
+  "author": "stylelint",
   "type": "module",
   "scripts": {
     "format": "prettier --write .",
