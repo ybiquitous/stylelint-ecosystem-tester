@@ -19,7 +19,7 @@ readdirSync(workflowsDir).forEach((file) => {
 	const pkg = parse(workflowContent).jobs.test.with.package;
 
 	newPackageLines.push(
-		`| [${pkg}](https://www.npmjs.com/package/${pkg}) | ${createStatusBadge(workflowFile)} |`,
+		`| [${pkg}](https://www.npmjs.com/package/${pkg}) | ${createStatusBadge(file)} |`,
 	);
 	numberOfPackages++;
 });
