@@ -1,4 +1,4 @@
-name: latest
+name: stylelint-react-native
 on:
   push:
     branches:
@@ -14,12 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-042-stylelint-react-native-latest
+  group: ${{ github.workflow }}-${{ github.ref }}-42-latest
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-react-native
+    name: latest
     with:
       package: stylelint-react-native
       stylelint-version: stylelint@latest

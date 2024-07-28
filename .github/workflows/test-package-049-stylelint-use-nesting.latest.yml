@@ -1,4 +1,4 @@
-name: latest
+name: stylelint-use-nesting
 on:
   push:
     branches:
@@ -14,12 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-049-stylelint-use-nesting-latest
+  group: ${{ github.workflow }}-${{ github.ref }}-49-latest
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-use-nesting
+    name: latest
     with:
       package: stylelint-use-nesting
       stylelint-version: stylelint@latest

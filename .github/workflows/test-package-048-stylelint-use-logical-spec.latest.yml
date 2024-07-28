@@ -1,4 +1,4 @@
-name: latest
+name: stylelint-use-logical-spec
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-048-stylelint-use-logical-spec-latest
+  group: ${{ github.workflow }}-${{ github.ref }}-48-latest
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-use-logical-spec
+    name: latest
     with:
       package: stylelint-use-logical-spec
       stylelint-version: stylelint@latest

@@ -1,4 +1,4 @@
-name: latest
+name: stylelint-formatter-pretty
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-032-stylelint-formatter-pretty-latest
+  group: ${{ github.workflow }}-${{ github.ref }}-32-latest
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-formatter-pretty
+    name: latest
     with:
       package: stylelint-formatter-pretty
       stylelint-version: stylelint@latest

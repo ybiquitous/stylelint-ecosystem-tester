@@ -1,4 +1,4 @@
-name: next
+name: stylelint-plugin-stylus
 on:
   push:
     branches:
@@ -14,12 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-040-stylelint-plugin-stylus-next
+  group: ${{ github.workflow }}-${{ github.ref }}-40-next
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-plugin-stylus
+    name: next
     with:
       package: stylelint-plugin-stylus
       stylelint-version: stylelint/stylelint

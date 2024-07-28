@@ -10,12 +10,13 @@ function generateWorkflow({
 	template,
 	workflowFilePath,
 	workflowName,
+	testName,
 }) {
 	const workflow = parse(template);
 
 	// Set the workflow name
 	workflow.name = workflowName;
-	workflow.jobs.test.name = pkg;
+	workflow.jobs.test.name = testName;
 
 	// Run the workflow on changes to the workflow file itself.
 	workflow.on.push.paths.push(workflowFilePath);
@@ -57,12 +58,13 @@ ecosystemData.packages.forEach((pkg, index) => {
 
 	const latestStylelintWorkflowFilePath = `.github/workflows/test-package-${slug}.latest.yml`;
 	const latestStylelintWorkflow = generateWorkflow({
-		concurrencyGroup: '${{ github.workflow }}-${{ github.ref }}-' + slug + '-latest',
+		concurrencyGroup: '${{ github.workflow }}-${{ github.ref }}-' + index + '-latest',
 		pkg,
 		stylelintVersion: 'stylelint@latest',
 		template: workflowTemplateContent,
 		workflowFilePath: latestStylelintWorkflowFilePath,
-		workflowName: 'latest',
+		workflowName: pkg,
+		testName: 'latest',
 	});
 
 	const latestWorkflowFile = new URL(`../${latestStylelintWorkflowFilePath}`, import.meta.url);
@@ -72,12 +74,13 @@ ecosystemData.packages.forEach((pkg, index) => {
 
 	const nextStylelintWorkflowFilePath = `.github/workflows/test-package-${slug}.next.yml`;
 	const nextStylelintWorkflow = generateWorkflow({
-		concurrencyGroup: '${{ github.workflow }}-${{ github.ref }}-' + slug + '-next',
+		concurrencyGroup: '${{ github.workflow }}-${{ github.ref }}-' + index + '-next',
 		pkg,
 		stylelintVersion: 'stylelint/stylelint',
 		template: workflowTemplateContent,
 		workflowFilePath: nextStylelintWorkflowFilePath,
-		workflowName: 'next',
+		workflowName: pkg,
+		testName: 'next',
 	});
 
 	const nextWorkflowFile = new URL(`../${nextStylelintWorkflowFilePath}`, import.meta.url);

@@ -1,4 +1,4 @@
-name: latest
+name: stylelint-value-no-unknown-custom-properties
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-050-stylelint-value-no-unknown-custom-properties-latest
+  group: ${{ github.workflow }}-${{ github.ref }}-50-latest
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-value-no-unknown-custom-properties
+    name: latest
     with:
       package: stylelint-value-no-unknown-custom-properties
       stylelint-version: stylelint@latest

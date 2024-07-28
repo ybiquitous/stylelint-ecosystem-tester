@@ -1,4 +1,4 @@
-name: next
+name: stylelint-config-idiomatic-order
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-011-stylelint-config-idiomatic-order-next
+  group: ${{ github.workflow }}-${{ github.ref }}-11-next
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-config-idiomatic-order
+    name: next
     with:
       package: stylelint-config-idiomatic-order
       stylelint-version: stylelint/stylelint

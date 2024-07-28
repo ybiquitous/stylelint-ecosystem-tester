@@ -1,4 +1,4 @@
-name: next
+name: stylelint-config-twbs-bootstrap
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-025-stylelint-config-twbs-bootstrap-next
+  group: ${{ github.workflow }}-${{ github.ref }}-25-next
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-config-twbs-bootstrap
+    name: next
     with:
       package: stylelint-config-twbs-bootstrap
       stylelint-version: stylelint/stylelint

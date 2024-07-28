@@ -1,4 +1,4 @@
-name: latest
+name: stylelint-scss
 on:
   push:
     branches:
@@ -14,12 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-043-stylelint-scss-latest
+  group: ${{ github.workflow }}-${{ github.ref }}-43-latest
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-scss
+    name: latest
     with:
       package: stylelint-scss
       stylelint-version: stylelint@latest

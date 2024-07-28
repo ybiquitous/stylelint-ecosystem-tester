@@ -1,4 +1,4 @@
-name: next
+name: stylelint-config-recommended-scss
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-017-stylelint-config-recommended-scss-next
+  group: ${{ github.workflow }}-${{ github.ref }}-17-next
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-config-recommended-scss
+    name: next
     with:
       package: stylelint-config-recommended-scss
       stylelint-version: stylelint/stylelint

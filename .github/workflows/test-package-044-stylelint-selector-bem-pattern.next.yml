@@ -1,4 +1,4 @@
-name: next
+name: stylelint-selector-bem-pattern
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-044-stylelint-selector-bem-pattern-next
+  group: ${{ github.workflow }}-${{ github.ref }}-44-next
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-selector-bem-pattern
+    name: next
     with:
       package: stylelint-selector-bem-pattern
       stylelint-version: stylelint/stylelint

@@ -1,4 +1,4 @@
-name: next
+name: stylelint-order
 on:
   push:
     branches:
@@ -14,12 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-037-stylelint-order-next
+  group: ${{ github.workflow }}-${{ github.ref }}-37-next
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-order
+    name: next
     with:
       package: stylelint-order
       stylelint-version: stylelint/stylelint

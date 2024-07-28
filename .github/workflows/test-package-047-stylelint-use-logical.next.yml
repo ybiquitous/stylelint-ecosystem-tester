@@ -1,4 +1,4 @@
-name: next
+name: stylelint-use-logical
 on:
   push:
     branches:
@@ -14,12 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-047-stylelint-use-logical-next
+  group: ${{ github.workflow }}-${{ github.ref }}-47-next
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-use-logical
+    name: next
     with:
       package: stylelint-use-logical
       stylelint-version: stylelint/stylelint

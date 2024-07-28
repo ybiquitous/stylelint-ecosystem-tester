@@ -1,4 +1,4 @@
-name: next
+name: stylelint-config-html
 on:
   push:
     branches:
@@ -14,12 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-010-stylelint-config-html-next
+  group: ${{ github.workflow }}-${{ github.ref }}-10-next
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-config-html
+    name: next
     with:
       package: stylelint-config-html
       stylelint-version: stylelint/stylelint

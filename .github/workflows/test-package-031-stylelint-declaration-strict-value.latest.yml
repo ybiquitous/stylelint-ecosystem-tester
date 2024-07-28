@@ -1,4 +1,4 @@
-name: latest
+name: stylelint-declaration-strict-value
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-031-stylelint-declaration-strict-value-latest
+  group: ${{ github.workflow }}-${{ github.ref }}-31-latest
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-declaration-strict-value
+    name: latest
     with:
       package: stylelint-declaration-strict-value
       stylelint-version: stylelint@latest

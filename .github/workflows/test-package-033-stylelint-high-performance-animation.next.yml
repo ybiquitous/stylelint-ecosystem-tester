@@ -1,4 +1,4 @@
-name: next
+name: stylelint-high-performance-animation
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-033-stylelint-high-performance-animation-next
+  group: ${{ github.workflow }}-${{ github.ref }}-33-next
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-high-performance-animation
+    name: next
     with:
       package: stylelint-high-performance-animation
       stylelint-version: stylelint/stylelint

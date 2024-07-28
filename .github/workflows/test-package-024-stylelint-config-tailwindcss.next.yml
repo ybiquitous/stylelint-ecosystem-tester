@@ -1,4 +1,4 @@
-name: next
+name: stylelint-config-tailwindcss
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-024-stylelint-config-tailwindcss-next
+  group: ${{ github.workflow }}-${{ github.ref }}-24-next
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-config-tailwindcss
+    name: next
     with:
       package: stylelint-config-tailwindcss
       stylelint-version: stylelint/stylelint

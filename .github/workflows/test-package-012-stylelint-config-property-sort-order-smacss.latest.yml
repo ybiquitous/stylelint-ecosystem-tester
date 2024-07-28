@@ -1,4 +1,4 @@
-name: latest
+name: stylelint-config-property-sort-order-smacss
 on:
   push:
     branches:
@@ -14,13 +14,12 @@ on:
   schedule:
     - cron: 0 0 * * *
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref
-    }}-012-stylelint-config-property-sort-order-smacss-latest
+  group: ${{ github.workflow }}-${{ github.ref }}-12-latest
   cancel-in-progress: true
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
-    name: stylelint-config-property-sort-order-smacss
+    name: latest
     with:
       package: stylelint-config-property-sort-order-smacss
       stylelint-version: stylelint@latest
