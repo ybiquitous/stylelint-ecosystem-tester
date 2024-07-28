@@ -1,4 +1,4 @@
-name: Test stylelint-actions-formatters
+name: stylelint-actions-formatters
 on:
   push:
     branches:

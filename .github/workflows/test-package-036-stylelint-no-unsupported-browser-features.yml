@@ -1,4 +1,4 @@
-name: Test stylelint-no-unsupported-browser-features
+name: stylelint-no-unsupported-browser-features
 on:
   push:
     branches:

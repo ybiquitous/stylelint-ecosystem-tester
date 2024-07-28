@@ -1,4 +1,4 @@
-name: Test stylelint-config-tailwindcss
+name: stylelint-config-tailwindcss
 on:
   push:
     branches:

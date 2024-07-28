@@ -1,4 +1,4 @@
-name: Test stylelint-formatter-pretty
+name: stylelint-formatter-pretty
 on:
   push:
     branches:

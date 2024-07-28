@@ -9,7 +9,7 @@ let numberOfPackages = 0;
 
 const newPackageLines = [];
 newPackageLines.push('| Package | Status |');
-newPackageLines.push('| :------ | :----: |');
+newPackageLines.push('| :------ | ----: |');
 
 readdirSync(workflowsDir).forEach((file) => {
 	if (!file.startsWith('test-package-')) return;

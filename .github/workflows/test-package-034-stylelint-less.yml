@@ -1,4 +1,4 @@
-name: Test stylelint-less
+name: stylelint-less
 on:
   push:
     branches:

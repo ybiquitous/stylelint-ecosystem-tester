@@ -1,4 +1,4 @@
-name: Test stylelint-codeframe-formatter
+name: stylelint-codeframe-formatter
 on:
   push:
     branches:

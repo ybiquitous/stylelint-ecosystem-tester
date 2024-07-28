@@ -1,4 +1,4 @@
-name: Test stylelint-config-recess-order
+name: stylelint-config-recess-order
 on:
   push:
     branches:

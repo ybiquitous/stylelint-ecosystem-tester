@@ -1,4 +1,4 @@
-name: Test stylelint-declaration-block-no-ignored-properties
+name: stylelint-declaration-block-no-ignored-properties
 on:
   push:
     branches:

@@ -30,7 +30,7 @@ ecosystemData.packages.forEach((pkg, index) => {
 	const workflowFilePath = `.github/workflows/test-package-${slug}.yml`;
 
 	// Set the name of the workflow.
-	workflow.name = `Test ${pkg}`;
+	workflow.name = pkg;
 
 	// Run the workflow on changes to the workflow file itself.
 	workflow.on.push.paths.push(workflowFilePath);

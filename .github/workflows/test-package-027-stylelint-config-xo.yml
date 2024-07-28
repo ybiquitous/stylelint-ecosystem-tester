@@ -1,4 +1,4 @@
-name: Test stylelint-config-xo
+name: stylelint-config-xo
 on:
   push:
     branches:

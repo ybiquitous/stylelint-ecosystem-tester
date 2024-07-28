@@ -1,4 +1,4 @@
-name: Test stylelint-use-nesting
+name: stylelint-use-nesting
 on:
   push:
     branches:

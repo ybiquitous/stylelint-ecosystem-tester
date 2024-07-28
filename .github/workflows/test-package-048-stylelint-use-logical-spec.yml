@@ -1,4 +1,4 @@
-name: Test stylelint-use-logical-spec
+name: stylelint-use-logical-spec
 on:
   push:
     branches:

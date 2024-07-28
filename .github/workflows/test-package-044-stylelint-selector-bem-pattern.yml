@@ -1,4 +1,4 @@
-name: Test stylelint-selector-bem-pattern
+name: stylelint-selector-bem-pattern
 on:
   push:
     branches:

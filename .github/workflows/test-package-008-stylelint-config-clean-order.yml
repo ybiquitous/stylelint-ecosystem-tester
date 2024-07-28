@@ -1,4 +1,4 @@
-name: Test stylelint-config-clean-order
+name: stylelint-config-clean-order
 on:
   push:
     branches:

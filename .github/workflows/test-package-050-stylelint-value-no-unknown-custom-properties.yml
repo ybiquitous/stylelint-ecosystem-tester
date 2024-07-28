@@ -1,4 +1,4 @@
-name: Test stylelint-value-no-unknown-custom-properties
+name: stylelint-value-no-unknown-custom-properties
 on:
   push:
     branches:

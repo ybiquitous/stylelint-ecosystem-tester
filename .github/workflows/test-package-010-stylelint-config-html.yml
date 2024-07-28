@@ -1,4 +1,4 @@
-name: Test stylelint-config-html
+name: stylelint-config-html
 on:
   push:
     branches:

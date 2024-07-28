@@ -1,4 +1,4 @@
-name: Test stylelint-checkstyle-reporter
+name: stylelint-checkstyle-reporter
 on:
   push:
     branches:

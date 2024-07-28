@@ -1,4 +1,4 @@
-name: Test stylelint-config-recommended-scss
+name: stylelint-config-recommended-scss
 on:
   push:
     branches:

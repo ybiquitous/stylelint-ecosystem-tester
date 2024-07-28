@@ -1,4 +1,4 @@
-name: Test @shopify/stylelint-plugin
+name: '@shopify/stylelint-plugin'
 on:
   push:
     branches:

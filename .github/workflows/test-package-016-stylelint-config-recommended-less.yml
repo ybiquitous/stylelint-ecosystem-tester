@@ -1,4 +1,4 @@
-name: Test stylelint-config-recommended-less
+name: stylelint-config-recommended-less
 on:
   push:
     branches:

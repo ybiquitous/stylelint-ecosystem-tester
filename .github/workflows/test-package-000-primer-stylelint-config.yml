@@ -1,4 +1,4 @@
-name: Test @primer/stylelint-config
+name: '@primer/stylelint-config'
 on:
   push:
     branches:

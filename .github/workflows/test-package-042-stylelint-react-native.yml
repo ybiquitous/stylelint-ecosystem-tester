@@ -1,4 +1,4 @@
-name: Test stylelint-react-native
+name: stylelint-react-native
 on:
   push:
     branches:

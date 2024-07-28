@@ -1,4 +1,4 @@
-name: Test stylelint-prettier
+name: stylelint-prettier
 on:
   push:
     branches:

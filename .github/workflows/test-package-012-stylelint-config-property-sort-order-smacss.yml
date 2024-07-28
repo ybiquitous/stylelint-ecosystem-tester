@@ -1,4 +1,4 @@
-name: Test stylelint-config-property-sort-order-smacss
+name: stylelint-config-property-sort-order-smacss
 on:
   push:
     branches:

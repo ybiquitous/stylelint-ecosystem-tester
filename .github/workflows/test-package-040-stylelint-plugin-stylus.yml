@@ -1,4 +1,4 @@
-name: Test stylelint-plugin-stylus
+name: stylelint-plugin-stylus
 on:
   push:
     branches:

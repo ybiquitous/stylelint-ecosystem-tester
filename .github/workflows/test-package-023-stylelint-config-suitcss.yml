@@ -1,4 +1,4 @@
-name: Test stylelint-config-suitcss
+name: stylelint-config-suitcss
 on:
   push:
     branches:

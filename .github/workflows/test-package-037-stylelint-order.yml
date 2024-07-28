@@ -1,4 +1,4 @@
-name: Test stylelint-order
+name: stylelint-order
 on:
   push:
     branches:

@@ -1,4 +1,4 @@
-name: Test stylelint-scss
+name: stylelint-scss
 on:
   push:
     branches:

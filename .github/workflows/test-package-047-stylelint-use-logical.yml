@@ -1,4 +1,4 @@
-name: Test stylelint-use-logical
+name: stylelint-use-logical
 on:
   push:
     branches:

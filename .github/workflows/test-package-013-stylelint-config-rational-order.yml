@@ -1,4 +1,4 @@
-name: Test stylelint-config-rational-order
+name: stylelint-config-rational-order
 on:
   push:
     branches:

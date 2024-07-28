@@ -1,4 +1,4 @@
-name: Test stylelint-config-sass-guidelines
+name: stylelint-config-sass-guidelines
 on:
   push:
     branches:

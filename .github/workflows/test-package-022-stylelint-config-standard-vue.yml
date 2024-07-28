@@ -1,4 +1,4 @@
-name: Test stylelint-config-standard-vue
+name: stylelint-config-standard-vue
 on:
   push:
     branches:

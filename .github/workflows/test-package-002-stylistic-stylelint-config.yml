@@ -1,4 +1,4 @@
-name: Test @stylistic/stylelint-config
+name: '@stylistic/stylelint-config'
 on:
   push:
     branches:

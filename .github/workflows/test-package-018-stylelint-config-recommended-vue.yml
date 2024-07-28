@@ -1,4 +1,4 @@
-name: Test stylelint-config-recommended-vue
+name: stylelint-config-recommended-vue
 on:
   push:
     branches:

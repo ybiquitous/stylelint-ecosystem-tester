@@ -1,4 +1,4 @@
-name: Test stylelint-high-performance-animation
+name: stylelint-high-performance-animation
 on:
   push:
     branches:

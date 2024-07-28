@@ -1,4 +1,4 @@
-name: Test stylelint-plugin-defensive-css
+name: stylelint-plugin-defensive-css
 on:
   push:
     branches:

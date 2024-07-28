@@ -1,4 +1,4 @@
-name: Test stylelint-declaration-strict-value
+name: stylelint-declaration-strict-value
 on:
   push:
     branches:

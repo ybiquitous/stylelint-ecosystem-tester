@@ -1,4 +1,4 @@
-name: Test stylelint-config-idiomatic-order
+name: stylelint-config-idiomatic-order
 on:
   push:
     branches:

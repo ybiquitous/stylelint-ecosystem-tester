@@ -1,4 +1,4 @@
-name: Test stylelint-media-use-custom-media
+name: stylelint-media-use-custom-media
 on:
   push:
     branches:
