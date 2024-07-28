@@ -1,0 +1,25 @@
+name: latest
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package.024-stylelint-config-tailwindcss.latest.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package.024-stylelint-config-tailwindcss.latest.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref
+    }}-024-stylelint-config-tailwindcss-latest
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    with:
+      package: stylelint-config-tailwindcss
+      stylelint-version: stylelint@latest

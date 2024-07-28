@@ -1,0 +1,25 @@
+name: latest
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package.032-stylelint-formatter-pretty.latest.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package.032-stylelint-formatter-pretty.latest.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref
+    }}-032-stylelint-formatter-pretty-latest
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    with:
+      package: stylelint-formatter-pretty
+      stylelint-version: stylelint@latest

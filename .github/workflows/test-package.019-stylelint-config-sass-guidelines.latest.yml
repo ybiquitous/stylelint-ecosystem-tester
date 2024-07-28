@@ -1,0 +1,25 @@
+name: latest
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package.019-stylelint-config-sass-guidelines.latest.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package.019-stylelint-config-sass-guidelines.latest.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref
+    }}-019-stylelint-config-sass-guidelines-latest
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    with:
+      package: stylelint-config-sass-guidelines
+      stylelint-version: stylelint@latest
