@@ -1,0 +1,25 @@
+name: latest
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-026-stylelint-config-wikimedia-latest.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-026-stylelint-config-wikimedia-latest.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref
+    }}-026-stylelint-config-wikimedia-latest
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    with:
+      package: stylelint-config-wikimedia
+      stylelint-version: stylelint@latest

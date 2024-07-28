@@ -1,0 +1,24 @@
+name: next
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-048-stylelint-use-logical-spec-next.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-048-stylelint-use-logical-spec-next.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-048-stylelint-use-logical-spec-next
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    with:
+      package: stylelint-use-logical-spec
+      stylelint-version: stylelint/stylelint

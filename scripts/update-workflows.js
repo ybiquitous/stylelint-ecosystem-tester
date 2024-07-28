@@ -35,7 +35,7 @@ function generateWorkflow({
 const workflowsDir = new URL('../.github/workflows', import.meta.url);
 
 readdirSync(workflowsDir).forEach((file) => {
-	if (!file.startsWith('test-package.')) return;
+	if (!file.startsWith('test-package-')) return;
 
 	const workflowFile = new URL(`../.github/workflows/${file}`, import.meta.url);
 	rmSync(fileURLToPath(workflowFile), { force: true });
@@ -54,7 +54,7 @@ const workflowTemplateContent = readFileSync(workflowTemplateFile, 'utf8');
 ecosystemData.packages.forEach((pkg, index) => {
 	const slug = generateSlug(pkg, index);
 
-	const latestStylelintWorkflowFilePath = `.github/workflows/test-package.${slug}.latest.yml`;
+	const latestStylelintWorkflowFilePath = `.github/workflows/test-package-${slug}-latest.yml`;
 	const latestStylelintWorkflow = generateWorkflow({
 		concurrencyGroup: '${{ github.workflow }}-${{ github.ref }}-' + slug + '-latest',
 		pkg,
@@ -69,7 +69,7 @@ ecosystemData.packages.forEach((pkg, index) => {
 
 	writeFileSync(fileURLToPath(latestWorkflowFile), latestWorkflowContent, 'utf8');
 
-	const nextStylelintWorkflowFilePath = `.github/workflows/test-package.${slug}.next.yml`;
+	const nextStylelintWorkflowFilePath = `.github/workflows/test-package-${slug}-next.yml`;
 	const nextStylelintWorkflow = generateWorkflow({
 		concurrencyGroup: '${{ github.workflow }}-${{ github.ref }}-' + slug + '-next',
 		pkg,
