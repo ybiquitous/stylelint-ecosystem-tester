@@ -26,7 +26,8 @@
     "lint:formatting": "prettier --check .",
     "lint:md": "remark . --quiet --frail",
     "prepare": "husky",
-    "test": "npm run lint",
+    "pretest": "npm run lint",
+    "test": "node scripts/test.js",
     "update-readme": "node scripts/update-readme.js",
     "update-workflows": "node scripts/update-workflows.js"
   },
