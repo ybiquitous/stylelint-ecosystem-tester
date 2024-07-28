@@ -1,0 +1,25 @@
+name: '@stylistic/stylelint-plugin'
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-003-stylistic-stylelint-plugin.latest.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-003-stylistic-stylelint-plugin.latest.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-3-latest
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    name: latest
+    with:
+      package: '@stylistic/stylelint-plugin'
+      stylelint-version: stylelint@latest

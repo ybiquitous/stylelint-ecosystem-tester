@@ -1,0 +1,21 @@
+name: Package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/test-package.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/test-package.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Every day at 00:00 UTC
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    uses: './.github/workflows/test-package.yml'

@@ -1,40 +1,36 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
-import { parse, stringify } from 'yaml';
+import { parse } from 'yaml';
 
-const workflowFile = new URL('../.github/workflows/test-ecosystem.yml', import.meta.url);
-const workflowContent = readFileSync(workflowFile, 'utf8');
-const packages = parse(workflowContent).jobs.test.strategy.matrix.package;
+import createStatusBadge from './utils/status-badge.js';
+import createNpmBadge from './utils/npm-badge.js';
 
-const failedPackages = new Set([
-	'@shopify/stylelint-plugin',
-	'@wordpress/stylelint-config',
-	'stylelint-codeframe-formatter',
-	'stylelint-codeframe-formatter',
-	'stylelint-config-rational-order',
-	'stylelint-config-recommended-less',
-	'stylelint-config-standard-vue',
-	'stylelint-config-tailwindcss',
-	'stylelint-config-wikimedia',
-	'stylelint-csstree-validator',
-	'stylelint-declaration-strict-value',
-	'stylelint-suitcss',
-	'stylelint-use-nesting',
-	'@stylistic/stylelint-config',
-]);
+const workflowsDir = new URL('../.github/workflows', import.meta.url);
+let numberOfPackages = 0;
 
 const newPackageLines = [];
-newPackageLines.push('| Package | Status |');
-newPackageLines.push('| :------ | :----: |');
+newPackageLines.push('| Package | Latest Stylelint | Next Stylelint |');
+newPackageLines.push('| :------ | ----: |  ----: |');
 
-for (const pkg of packages) {
-	const statusEmoji = failedPackages.has(pkg) ? '❌' : '✅';
-	newPackageLines.push(`| [${pkg}](https://www.npmjs.com/package/${pkg}) | ${statusEmoji} |`);
-}
+readdirSync(workflowsDir).forEach((file) => {
+	if (!file.startsWith('test-package-')) return;
+
+	if (file.endsWith('.next.yml')) return;
+
+	const workflowFile = new URL(`../.github/workflows/${file}`, import.meta.url);
+	const workflowContent = readFileSync(workflowFile, 'utf8');
+	const pkg = parse(workflowContent).jobs.test.with.package;
+
+	const latestBadge = createStatusBadge(file, 'latest');
+	const nextBadge = createStatusBadge(file.replace(/\.latest\.yml$/, '.next.yml'), 'next');
+
+	newPackageLines.push(`| ${createNpmBadge(pkg)} | ${latestBadge} | ${nextBadge} |`);
+	numberOfPackages++;
+});
 
 newPackageLines.push('');
-newPackageLines.push(`Total ${packages.length} packages`);
+newPackageLines.push(`Total ${numberOfPackages} packages`);
 
 const readmeFile = new URL('../README.md', import.meta.url);
 const readmeLines = readFileSync(readmeFile, 'utf8').split('\n');
