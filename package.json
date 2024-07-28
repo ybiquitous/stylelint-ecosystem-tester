@@ -27,7 +27,8 @@
     "lint:md": "remark . --quiet --frail",
     "prepare": "husky",
     "test": "npm run lint",
-    "update-readme": "node scripts/update-readme.js"
+    "update-readme": "node scripts/update-readme.js",
+    "update-workflows": "node scripts/update-workflows.js"
   },
   "lint-staged": {
     "*.{js,json,md,yaml,yml}": "prettier --write"
