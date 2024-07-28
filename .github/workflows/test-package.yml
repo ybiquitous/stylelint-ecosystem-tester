@@ -1,0 +1,107 @@
+name: Test Package (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        type: string
+        description: The package to test
+        required: true
+      stylelint-version:
+        type: string
+        description: The Stylelint version to test
+        required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Get repo info from ${{ inputs.package }}
+        id: repo-info
+        env:
+          PACKAGE: ${{ inputs.package }}
+        run: |
+          url=$(npm repo --browser=false --json "${PACKAGE}" | jq -r '.url')
+          echo "URL: ${url}"
+          echo "url=${url}" >> "${GITHUB_OUTPUT}"
+
+          fullname=$(echo "${url}" | sed -E 's/.*github.com\/([^/]+\/[^/]+).*/\1/')
+          echo "Fullname: ${fullname}"
+          echo "fullname=${fullname}" >> "${GITHUB_OUTPUT}"
+
+          directory=$(npm view "${PACKAGE}" 'repository.directory')
+          echo "Directory: ${directory}"
+          echo "directory=${directory}" >> "${GITHUB_OUTPUT}"
+
+      - name: Checkout ${{ steps.repo-info.outputs.fullname }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.repo-info.outputs.fullname }}
+
+      - name: Setup Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install latest npm
+        run: |
+          npm install --global npm@latest
+          echo "npm: $(npm --version)"
+
+      - name: Install pnpm
+        run: |
+          npm install --global pnpm
+          echo "pnpm: $(pnpm --version)"
+
+      - name: Install yarn
+        run: |
+          npm install --global yarn
+          echo "yarn: $(yarn --version)"
+
+      - name: Install dependencies
+        id: install-dependencies
+        working-directory: ${{ steps.repo-info.outputs.directory }}
+        env:
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: |
+          if ! npm install --no-audit; then
+            echo "::error ::The dependency installation failed. Visit ${PACKAGE_URL}"
+            exit 1
+          fi
+
+      - name: Install Stylelint ${{ inputs.stylelint-version }}
+        id: install-stylelint
+        working-directory: ${{ steps.repo-info.outputs.directory }}
+        env:
+          STYLELINT_VERSION: ${{ inputs.stylelint-version }}
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: |
+          if ! npm install --no-audit --no-save "${STYLELINT_VERSION}"; then
+            echo "::error ::The Stylelint (${STYLELINT_VERSION}) installation failed. Visit ${PACKAGE_URL}"
+            exit 1
+          fi
+
+      - name: Run build
+        id: build
+        working-directory: ${{ steps.repo-info.outputs.directory }}
+        env:
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: |
+          if ! npm run build --if-present; then
+            echo "::error ::The build failed. Visit ${PACKAGE_URL}"
+            exit 1
+          fi
+
+      - name: Run test
+        id: test
+        working-directory: ${{ steps.repo-info.outputs.directory }}
+        env:
+          PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+        run: |
+          if ! npm test; then
+            echo "::error ::The test failed. Visit ${PACKAGE_URL}"
+            exit 1
+          fi
