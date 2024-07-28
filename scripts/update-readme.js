@@ -1,15 +1,17 @@
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+
 import { parse } from 'yaml';
 
-import createStatusBadge from './utils/status-badge.js';
 import createNpmBadge from './utils/npm-badge.js';
+import createStatusBadge from './utils/status-badge.js';
 
 const workflowsDir = new URL('../.github/workflows', import.meta.url);
 let numberOfPackages = 0;
 
 const newPackageLines = [];
+
 newPackageLines.push('| Package | Latest Stylelint | Next Stylelint |');
 newPackageLines.push('| :------ | ----: |  ----: |');
 

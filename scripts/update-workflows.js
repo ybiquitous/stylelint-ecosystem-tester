@@ -1,6 +1,7 @@
-import { readdirSync, rmSync, readFileSync, writeFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+
 import { parse, stringify } from 'yaml';
 
 import generateSlug from './utils/slug.js';
@@ -42,6 +43,7 @@ readdirSync(workflowsDir).forEach((file) => {
 	if (!file.startsWith('test-package-')) return;
 
 	const workflowFile = new URL(`../.github/workflows/${file}`, import.meta.url);
+
 	rmSync(fileURLToPath(workflowFile), { force: true });
 });
 
@@ -60,7 +62,7 @@ ecosystemData.packages.forEach((pkg, index) => {
 
 	const latestStylelintWorkflowFilePath = `.github/workflows/test-package-${slug}.latest.yml`;
 	const latestStylelintWorkflow = generateWorkflow({
-		concurrencyGroup: '${{ github.workflow }}-${{ github.ref }}-' + index + '-latest',
+		concurrencyGroup: `\${{ github.workflow }}-\${{ github.ref }}-${index}-latest`,
 		pkg,
 		stylelintVersion: 'stylelint@latest',
 		template: workflowTemplateContent,
@@ -76,7 +78,7 @@ ecosystemData.packages.forEach((pkg, index) => {
 
 	const nextStylelintWorkflowFilePath = `.github/workflows/test-package-${slug}.next.yml`;
 	const nextStylelintWorkflow = generateWorkflow({
-		concurrencyGroup: '${{ github.workflow }}-${{ github.ref }}-' + index + '-next',
+		concurrencyGroup: `\${{ github.workflow }}-\${{ github.ref }}-${index}-next`,
 		pkg,
 		stylelintVersion: 'stylelint/stylelint',
 		template: workflowTemplateContent,
