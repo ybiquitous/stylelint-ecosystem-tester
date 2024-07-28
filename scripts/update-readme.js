@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import { parse } from 'yaml';
+
 import createStatusBadge from './utils/status-badge.js';
 import createNpmBadge from './utils/npm-badge.js';
 

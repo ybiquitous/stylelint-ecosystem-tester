@@ -1,6 +1,8 @@
 import { readdirSync, rmSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { execSync } from 'node:child_process';
 import { parse, stringify } from 'yaml';
+
 import generateSlug from './utils/slug.js';
 
 function generateWorkflow({
@@ -88,3 +90,5 @@ ecosystemData.packages.forEach((pkg, index) => {
 
 	writeFileSync(fileURLToPath(nextWorkflowFile), nextWorkflowContent, 'utf8');
 });
+
+execSync(`npx prettier --write ".github/workflows/test-package-*"`, { stdio: 'inherit' });
