@@ -1,4 +1,4 @@
-export default function createStatusBadge(workflowFile) {
+export default function createStatusBadge(workflowFile, stylelintVersion) {
 	// TODO : rename `romainmenke` to `stylelint`
-	return `[![Test status](https://github.com/romainmenke/stylelint-ecosystem-tester/actions/workflows/${workflowFile}/badge.svg)](https://github.com/romainmenke/stylelint-ecosystem-tester/actions/workflows/${workflowFile})`;
+	return `[![${stylelintVersion}](https://github.com/romainmenke/stylelint-ecosystem-tester/actions/workflows/${workflowFile}/badge.svg)](https://github.com/romainmenke/stylelint-ecosystem-tester/actions/workflows/${workflowFile})`;
 }

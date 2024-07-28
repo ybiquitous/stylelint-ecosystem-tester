@@ -8,18 +8,23 @@ const workflowsDir = new URL('../.github/workflows', import.meta.url);
 let numberOfPackages = 0;
 
 const newPackageLines = [];
-newPackageLines.push('| Package | Status |');
-newPackageLines.push('| :------ | ----: |');
+newPackageLines.push('| Package | Latest Stylelint | Next Stylelint |');
+newPackageLines.push('| :------ | ----: |  ----: |');
 
 readdirSync(workflowsDir).forEach((file) => {
 	if (!file.startsWith('test-package-')) return;
+
+	if (file.endsWith('.next.yml')) return;
 
 	const workflowFile = new URL(`../.github/workflows/${file}`, import.meta.url);
 	const workflowContent = readFileSync(workflowFile, 'utf8');
 	const pkg = parse(workflowContent).jobs.test.with.package;
 
+	const latestBadge = createStatusBadge(file, 'latest');
+	const nextBadge = createStatusBadge(file.replace(/\.latest\.yml$/, '.next.yml'), 'next');
+
 	newPackageLines.push(
-		`| [${pkg}](https://www.npmjs.com/package/${pkg}) | ${createStatusBadge(file)} |`,
+		`| [${pkg}](https://www.npmjs.com/package/${pkg}) | ${latestBadge} | ${nextBadge} |`,
 	);
 	numberOfPackages++;
 });
