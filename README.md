@@ -4,7 +4,7 @@
 
 A comprehensive test suite for [Stylelint](https://stylelint.io) ecosystem.
 
-To see test results, click the status badge of the relevant package in the list below.
+To see test results, click the status badge for the relevant package in the list below.
 
 ## Packages
 
