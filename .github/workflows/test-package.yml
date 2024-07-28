@@ -67,46 +67,41 @@ jobs:
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
-          if npm install --no-audit; then
-            echo "passed=true" >> "${GITHUB_OUTPUT}"
-          else
+          if ! npm install --no-audit; then
             echo "::error ::The dependency installation failed. Visit ${PACKAGE_URL}"
+            exit 1
           fi
 
       - name: Install Stylelint ${{ matrix.stylelint-version }}
         id: install-stylelint
-        if: ${{ steps.install-dependencies.outputs.passed }}
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           STYLELINT_VERSION: ${{ matrix.stylelint-version }}
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
-          if npm install --no-audit --no-save "${STYLELINT_VERSION}"; then
-            echo "passed=true" >> "${GITHUB_OUTPUT}"
-          else
+          if ! npm install --no-audit --no-save "${STYLELINT_VERSION}"; then
             echo "::error ::The Stylelint (${STYLELINT_VERSION}) installation failed. Visit ${PACKAGE_URL}"
+            exit 1
           fi
 
       - name: Run build
         id: build
-        if: ${{ steps.install-dependencies.outputs.passed && steps.install-stylelint.outputs.passed }}
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
-          if npm run build --if-present; then
-            echo "passed=true" >> "${GITHUB_OUTPUT}"
-          else
+          if ! npm run build --if-present; then
             echo "::error ::The build failed. Visit ${PACKAGE_URL}"
+            exit 1
           fi
 
       - name: Run test
         id: test
-        if: ${{ steps.install-dependencies.outputs.passed && steps.install-stylelint.outputs.passed && steps.build.outputs.passed }}
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
           if ! npm test; then
             echo "::error ::The test failed. Visit ${PACKAGE_URL}"
+            exit 1
           fi
