@@ -6,7 +6,7 @@ import generateSlug from './slug.mjs';
 // Clean existing workflows for packages that no longer exist.
 const workflowsDir = new URL('../../.github/workflows', import.meta.url);
 
-readdirSync(workflowsDir).forEach(file => {
+readdirSync(workflowsDir).forEach((file) => {
 	if (!file.startsWith('test-package-')) return;
 
 	const workflowFile = new URL(`../../.github/workflows/${file}`, import.meta.url);
