@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import { parse } from 'yaml';
 import createStatusBadge from './utils/status-badge.js';
+import createNpmBadge from './utils/npm-badge.js';
 
 const workflowsDir = new URL('../.github/workflows', import.meta.url);
 let numberOfPackages = 0;
@@ -23,9 +24,7 @@ readdirSync(workflowsDir).forEach((file) => {
 	const latestBadge = createStatusBadge(file, 'latest');
 	const nextBadge = createStatusBadge(file.replace(/\.latest\.yml$/, '.next.yml'), 'next');
 
-	newPackageLines.push(
-		`| [${pkg}](https://www.npmjs.com/package/${pkg}) | ${latestBadge} | ${nextBadge} |`,
-	);
+	newPackageLines.push(`| ${createNpmBadge(pkg)} | ${latestBadge} | ${nextBadge} |`);
 	numberOfPackages++;
 });
 
