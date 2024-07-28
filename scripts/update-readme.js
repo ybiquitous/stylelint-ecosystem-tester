@@ -10,9 +10,11 @@ import createStatusBadge from './utils/status-badge.js';
 const workflowsDir = new URL('../.github/workflows', import.meta.url);
 let numberOfPackages = 0;
 
+const latestStylelintVersion = execSync('npm view stylelint@latest version').toString().trim();
+
 const newPackageLines = [];
 
-newPackageLines.push('| Package | Latest Stylelint | Next Stylelint |');
+newPackageLines.push(`| Package | Latest Stylelint (${latestStylelintVersion}) | Next Stylelint |`);
 newPackageLines.push('| :------ | ----: |  ----: |');
 
 readdirSync(workflowsDir).forEach((file) => {
@@ -43,4 +45,4 @@ readmeLines.splice(startLineIndex + 1, endLineIndex - startLineIndex - 1, ...new
 
 writeFileSync(readmeFile, readmeLines.join('\n'), 'utf8');
 
-execSync(`npx prettier --write "${fileURLToPath(readmeFile)}"`);
+execSync(`npx prettier --write "${fileURLToPath(readmeFile)}"`, { stdio: 'inherit' });
