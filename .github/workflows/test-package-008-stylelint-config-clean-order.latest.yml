@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-clean-order
     with:
       package: stylelint-config-clean-order
       stylelint-version: stylelint@latest

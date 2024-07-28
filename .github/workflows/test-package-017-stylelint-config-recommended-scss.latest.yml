@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-recommended-scss
     with:
       package: stylelint-config-recommended-scss
       stylelint-version: stylelint@latest

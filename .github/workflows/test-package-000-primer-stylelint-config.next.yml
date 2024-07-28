@@ -19,6 +19,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: '@primer/stylelint-config'
     with:
       package: '@primer/stylelint-config'
       stylelint-version: stylelint/stylelint

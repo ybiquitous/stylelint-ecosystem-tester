@@ -19,6 +19,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-wikimedia
     with:
       package: stylelint-config-wikimedia
       stylelint-version: stylelint/stylelint

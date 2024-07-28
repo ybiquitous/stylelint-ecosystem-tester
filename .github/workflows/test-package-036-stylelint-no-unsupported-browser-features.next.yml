@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-no-unsupported-browser-features
     with:
       package: stylelint-no-unsupported-browser-features
       stylelint-version: stylelint/stylelint

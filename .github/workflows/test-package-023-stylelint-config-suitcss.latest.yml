@@ -19,6 +19,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-suitcss
     with:
       package: stylelint-config-suitcss
       stylelint-version: stylelint@latest

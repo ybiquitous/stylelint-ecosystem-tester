@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-idiomatic-order
     with:
       package: stylelint-config-idiomatic-order
       stylelint-version: stylelint/stylelint

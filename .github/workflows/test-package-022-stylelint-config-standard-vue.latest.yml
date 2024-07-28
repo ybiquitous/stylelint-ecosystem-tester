@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-standard-vue
     with:
       package: stylelint-config-standard-vue
       stylelint-version: stylelint@latest

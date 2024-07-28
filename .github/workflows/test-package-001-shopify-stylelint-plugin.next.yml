@@ -19,6 +19,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: '@shopify/stylelint-plugin'
     with:
       package: '@shopify/stylelint-plugin'
       stylelint-version: stylelint/stylelint

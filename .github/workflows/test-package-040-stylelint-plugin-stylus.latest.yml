@@ -19,6 +19,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-plugin-stylus
     with:
       package: stylelint-plugin-stylus
       stylelint-version: stylelint@latest

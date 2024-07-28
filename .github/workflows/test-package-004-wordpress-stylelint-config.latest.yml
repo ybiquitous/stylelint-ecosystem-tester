@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: '@wordpress/stylelint-config'
     with:
       package: '@wordpress/stylelint-config'
       stylelint-version: stylelint@latest

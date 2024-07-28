@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-codeframe-formatter
     with:
       package: stylelint-codeframe-formatter
       stylelint-version: stylelint@latest

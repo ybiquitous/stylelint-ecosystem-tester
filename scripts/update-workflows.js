@@ -15,6 +15,7 @@ function generateWorkflow({
 
 	// Set the workflow name
 	workflow.name = workflowName;
+	workflow.jobs.test.name = pkg;
 
 	// Run the workflow on changes to the workflow file itself.
 	workflow.on.push.paths.push(workflowFilePath);

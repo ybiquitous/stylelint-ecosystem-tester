@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: '@stylistic/stylelint-plugin'
     with:
       package: '@stylistic/stylelint-plugin'
       stylelint-version: stylelint@latest

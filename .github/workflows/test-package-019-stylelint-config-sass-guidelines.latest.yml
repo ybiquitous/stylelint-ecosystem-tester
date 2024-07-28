@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-sass-guidelines
     with:
       package: stylelint-config-sass-guidelines
       stylelint-version: stylelint@latest

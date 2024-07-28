@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-declaration-block-no-ignored-properties
     with:
       package: stylelint-declaration-block-no-ignored-properties
       stylelint-version: stylelint@latest

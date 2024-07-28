@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-declaration-strict-value
     with:
       package: stylelint-declaration-strict-value
       stylelint-version: stylelint@latest

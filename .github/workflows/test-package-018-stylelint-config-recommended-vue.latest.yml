@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-recommended-vue
     with:
       package: stylelint-config-recommended-vue
       stylelint-version: stylelint@latest

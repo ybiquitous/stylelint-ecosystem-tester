@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-actions-formatters
     with:
       package: stylelint-actions-formatters
       stylelint-version: stylelint@latest

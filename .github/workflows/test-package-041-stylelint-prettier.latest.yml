@@ -19,6 +19,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-prettier
     with:
       package: stylelint-prettier
       stylelint-version: stylelint@latest

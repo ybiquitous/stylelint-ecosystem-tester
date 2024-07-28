@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-rational-order
     with:
       package: stylelint-config-rational-order
       stylelint-version: stylelint/stylelint

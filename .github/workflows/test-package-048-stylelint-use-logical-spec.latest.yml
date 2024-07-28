@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-use-logical-spec
     with:
       package: stylelint-use-logical-spec
       stylelint-version: stylelint@latest

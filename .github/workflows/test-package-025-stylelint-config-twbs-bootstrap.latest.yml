@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-twbs-bootstrap
     with:
       package: stylelint-config-twbs-bootstrap
       stylelint-version: stylelint@latest

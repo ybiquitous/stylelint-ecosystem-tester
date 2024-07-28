@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-config-recommended-less
     with:
       package: stylelint-config-recommended-less
       stylelint-version: stylelint/stylelint

@@ -19,6 +19,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-scss
     with:
       package: stylelint-scss
       stylelint-version: stylelint/stylelint

@@ -20,6 +20,7 @@ concurrency:
 jobs:
   test:
     uses: ./.github/workflows/test-package.yml
+    name: stylelint-checkstyle-reporter
     with:
       package: stylelint-checkstyle-reporter
       stylelint-version: stylelint@latest
