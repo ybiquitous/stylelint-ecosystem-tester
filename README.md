@@ -8,6 +8,8 @@ To see test results, click the status badge for the relevant package in the list
 
 ## Packages
 
+[![Latest Stylelint](https://img.shields.io/npm/v/stylelint.svg?label=Latest+Stylelint)](https://www.npmjs.com/package/stylelint)
+
 <!-- START:PACKAGES -->
 
 | Package                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                        Latest Stylelint |                                                                                                                                                                                                                                                                                                                    Next Stylelint |
