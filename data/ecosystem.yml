@@ -1,7 +1,7 @@
 packages:
   # In alphabetical order
   - '@primer/stylelint-config'
-  - ['@shopify/stylelint-plugin', { test-command: 'npx jest' }]
+  - ['@shopify/stylelint-plugin', { test-command: 'npx --experimental-vm-modules jest' }]
   - '@stylistic/stylelint-config'
   - '@stylistic/stylelint-plugin'
   - '@wordpress/stylelint-config'
