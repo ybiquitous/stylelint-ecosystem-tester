@@ -11,6 +11,10 @@ on:
         type: string
         description: The Stylelint version to test
         required: true
+      test-command:
+        type: string
+        description: The test command to run
+        default: 'npm test'
 
 jobs:
   test:
@@ -99,7 +103,7 @@ jobs:
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
-          if ! npm test; then
+          if ! ${{ inputs.test-command }}; then
             echo "::error ::The test failed. Visit ${PACKAGE_URL}"
             exit 1
           fi

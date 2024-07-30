@@ -14,6 +14,7 @@ function generateWorkflow({
 	workflowFilePath,
 	workflowName,
 	testName,
+	testCommand,
 }) {
 	const workflow = parse(template);
 
@@ -32,6 +33,10 @@ function generateWorkflow({
 	workflow.jobs.test.with ??= {};
 	workflow.jobs.test.with.package = pkg;
 	workflow.jobs.test.with['stylelint-version'] = stylelintVersion;
+
+	if (testCommand) {
+		workflow.jobs.test.with['test-command'] = testCommand;
+	}
 
 	return workflow;
 }
@@ -57,7 +62,9 @@ const workflowTemplateFile = new URL('../templates/test-package.yml', import.met
 const workflowTemplateContent = readFileSync(workflowTemplateFile, 'utf8');
 
 // Generate workflows for each package
-ecosystemData.packages.forEach((pkg, index) => {
+ecosystemData.packages.forEach((packageConfig, index) => {
+	const [pkg, config = {}] = [packageConfig].flat();
+
 	const slug = generateSlug(pkg, index);
 
 	const latestStylelintWorkflowFilePath = `.github/workflows/test-package-${slug}.latest.yml`;
@@ -69,6 +76,7 @@ ecosystemData.packages.forEach((pkg, index) => {
 		workflowFilePath: latestStylelintWorkflowFilePath,
 		workflowName: pkg,
 		testName: 'latest',
+		testCommand: config['test-command'],
 	});
 
 	const latestWorkflowFile = new URL(`../${latestStylelintWorkflowFilePath}`, import.meta.url);
@@ -85,6 +93,7 @@ ecosystemData.packages.forEach((pkg, index) => {
 		workflowFilePath: nextStylelintWorkflowFilePath,
 		workflowName: pkg,
 		testName: 'next',
+		testCommand: config['test-command'],
 	});
 
 	const nextWorkflowFile = new URL(`../${nextStylelintWorkflowFilePath}`, import.meta.url);
