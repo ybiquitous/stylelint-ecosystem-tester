@@ -23,4 +23,6 @@ jobs:
     with:
       package: '@shopify/stylelint-plugin'
       stylelint-version: stylelint/stylelint
-      test-command: npx --experimental-vm-modules jest
+      test-command: NODE_OPTIONS="--experimental-vm-modules --no-warnings" npx jest
+        --runInBand
+      install-command: npm install --install-strategy=nested

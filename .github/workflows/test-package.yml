@@ -15,6 +15,10 @@ on:
         type: string
         description: The test command to run
         default: 'npm test'
+      install-command:
+        type: string
+        description: The install command to run
+        default: 'npm install --no-audit'
 
 jobs:
   test:
@@ -69,7 +73,7 @@ jobs:
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
-          if ! npm install --no-audit; then
+          if ! ${{ inputs.install-command }}; then
             echo "::error ::The dependency installation failed. Visit ${PACKAGE_URL}"
             exit 1
           fi
