@@ -25,4 +25,4 @@ jobs:
       stylelint-version: stylelint/stylelint
       test-command: NODE_OPTIONS="--experimental-vm-modules --no-warnings" npx jest
         --runInBand
-      install-command: npm install --install-strategy=nested
+      install-command: yarn
