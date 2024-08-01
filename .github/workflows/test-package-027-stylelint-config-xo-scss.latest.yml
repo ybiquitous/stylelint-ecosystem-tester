@@ -1,0 +1,25 @@
+name: stylelint-config-xo-scss
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-027-stylelint-config-xo-scss.latest.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-027-stylelint-config-xo-scss.latest.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-27-latest
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    name: latest
+    with:
+      package: stylelint-config-xo-scss
+      stylelint-version: stylelint@latest
