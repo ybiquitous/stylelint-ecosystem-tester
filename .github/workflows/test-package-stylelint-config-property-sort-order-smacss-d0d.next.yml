@@ -1,0 +1,26 @@
+name: stylelint-config-property-sort-order-smacss
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-stylelint-config-property-sort-order-smacss-d0d.next.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-stylelint-config-property-sort-order-smacss-d0d.next.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref
+    }}-stylelint-config-property-sort-order-smacss-d0d-next
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    name: next
+    with:
+      package: stylelint-config-property-sort-order-smacss
+      stylelint-version: stylelint/stylelint
