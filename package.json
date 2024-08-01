@@ -22,7 +22,7 @@
   "type": "module",
   "scripts": {
     "format": "prettier --write .",
-    "lint": "npm run lint:formatting && npm run lint:md",
+    "lint": "npm run lint:formatting && npm run lint:js && npm run lint:md",
     "lint:formatting": "prettier --check .",
     "lint:js": "eslint . --cache --max-warnings=0",
     "lint:md": "remark . --quiet --frail",
