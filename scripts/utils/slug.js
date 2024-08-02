@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 
 // Create a slug with these attributes:
 // - lowercase only (for file systems that are case-insensitive)
