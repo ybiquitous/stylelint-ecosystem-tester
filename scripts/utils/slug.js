@@ -1,15 +1,15 @@
+import crypto from 'node:crypto';
+
 // Create a slug with these attributes:
 // - lowercase only (for file systems that are case-insensitive)
 // - remove the scope character
 // - make sure the slug is a safe file name
-// - add a string sortable prefix to preserve the original order
-export default function generateSlug(name, index) {
-	const prefix = `000${index}`.slice(-3);
+// - add a short suffix to avoid conflicts when two packages would produce the same slug
+export default function createSlug(name) {
+	const suffix = crypto.createHash('md5').update(name).digest('hex').slice(0, 3);
 
-	const convertedName = name
+	return `${name}-${suffix}`
 		.toLowerCase()
 		.replace(/^@/g, '') // Remove the scope character.
 		.replace(/[^a-z0-9-_]/g, '-');
-
-	return `${prefix}-${convertedName}`;
 }

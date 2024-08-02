@@ -1,0 +1,25 @@
+name: stylelint-use-logical
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-stylelint-use-logical-b8e.latest.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-stylelint-use-logical-b8e.latest.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-stylelint-use-logical-b8e-latest
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    name: latest
+    with:
+      package: stylelint-use-logical
+      stylelint-version: stylelint@latest

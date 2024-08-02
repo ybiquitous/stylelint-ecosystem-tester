@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { parse, stringify } from 'yaml';
 
 import generateSlug from './utils/slug.js';
+import workflowFilename from './utils/workflow-filename.js';
 
 function generateWorkflow({
 	concurrencyGroup,
@@ -57,12 +58,12 @@ const workflowTemplateFile = new URL('../templates/test-package.yml', import.met
 const workflowTemplateContent = readFileSync(workflowTemplateFile, 'utf8');
 
 // Generate workflows for each package
-ecosystemData.packages.forEach((pkg, index) => {
-	const slug = generateSlug(pkg, index);
+ecosystemData.packages.forEach((pkg) => {
+	const slug = generateSlug(pkg);
 
-	const latestStylelintWorkflowFilePath = `.github/workflows/test-package-${slug}.latest.yml`;
+	const latestStylelintWorkflowFilePath = `.github/workflows/${workflowFilename(slug, 'latest')}`;
 	const latestStylelintWorkflow = generateWorkflow({
-		concurrencyGroup: `\${{ github.workflow }}-\${{ github.ref }}-${index}-latest`,
+		concurrencyGroup: `\${{ github.workflow }}-\${{ github.ref }}-${slug}-latest`,
 		pkg,
 		stylelintVersion: 'stylelint@latest',
 		template: workflowTemplateContent,
@@ -76,9 +77,9 @@ ecosystemData.packages.forEach((pkg, index) => {
 
 	writeFileSync(fileURLToPath(latestWorkflowFile), latestWorkflowContent, 'utf8');
 
-	const nextStylelintWorkflowFilePath = `.github/workflows/test-package-${slug}.next.yml`;
+	const nextStylelintWorkflowFilePath = `.github/workflows/${workflowFilename(slug, 'next')}`;
 	const nextStylelintWorkflow = generateWorkflow({
-		concurrencyGroup: `\${{ github.workflow }}-\${{ github.ref }}-${index}-next`,
+		concurrencyGroup: `\${{ github.workflow }}-\${{ github.ref }}-${slug}-next`,
 		pkg,
 		stylelintVersion: 'stylelint/stylelint',
 		template: workflowTemplateContent,
