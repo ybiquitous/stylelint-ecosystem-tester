@@ -1,0 +1,26 @@
+name: stylelint-declaration-strict-value
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-stylelint-declaration-strict-value-dec.latest.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-stylelint-declaration-strict-value-dec.latest.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref
+    }}-stylelint-declaration-strict-value-dec-latest
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    name: latest
+    with:
+      package: stylelint-declaration-strict-value
+      stylelint-version: stylelint@latest

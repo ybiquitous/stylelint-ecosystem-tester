@@ -1,0 +1,25 @@
+name: stylelint-react-native
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-stylelint-react-native-1b4.latest.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-stylelint-react-native-1b4.latest.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-stylelint-react-native-1b4-latest
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    name: latest
+    with:
+      package: stylelint-react-native
+      stylelint-version: stylelint@latest

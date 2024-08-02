@@ -1,0 +1,25 @@
+name: '@primer/stylelint-config'
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-primer-stylelint-config-0ab.next.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-primer-stylelint-config-0ab.next.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-primer-stylelint-config-0ab-next
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    name: next
+    with:
+      package: '@primer/stylelint-config'
+      stylelint-version: stylelint/stylelint

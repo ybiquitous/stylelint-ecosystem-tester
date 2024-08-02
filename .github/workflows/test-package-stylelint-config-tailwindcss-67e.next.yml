@@ -1,0 +1,26 @@
+name: stylelint-config-tailwindcss
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-stylelint-config-tailwindcss-67e.next.yml
+  pull_request:
+    paths:
+      - .github/workflows/test-package.yml
+      - .github/workflows/test-package-stylelint-config-tailwindcss-67e.next.yml
+  workflow_dispatch: null
+  schedule:
+    - cron: 0 0 * * *
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref
+    }}-stylelint-config-tailwindcss-67e-next
+  cancel-in-progress: true
+jobs:
+  test:
+    uses: ./.github/workflows/test-package.yml
+    name: next
+    with:
+      package: stylelint-config-tailwindcss
+      stylelint-version: stylelint/stylelint
