@@ -30,7 +30,6 @@ packages:
   - 'stylelint-config-standard-scss'
   - 'stylelint-config-standard-vue'
   - 'stylelint-config-suitcss'
-  - 'stylelint-config-tailwindcss'
   - 'stylelint-config-twbs-bootstrap'
   - 'stylelint-config-wikimedia'
   - 'stylelint-config-xo'
