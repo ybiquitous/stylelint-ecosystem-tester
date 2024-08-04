@@ -73,7 +73,7 @@ jobs:
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
         run: |
-          if ! ${{ inputs.install-command }}; then
+          if ! eval "$INSTALL_COMMAND"; then
             echo "::error ::The dependency installation failed. Visit ${PACKAGE_URL}"
             exit 1
           fi
