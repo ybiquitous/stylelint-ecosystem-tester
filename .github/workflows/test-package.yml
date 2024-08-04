@@ -72,6 +72,7 @@ jobs:
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+          INSTALL_COMMAND: ${{ inputs.install-command }}
         run: |
           if ! eval "$INSTALL_COMMAND"; then
             echo "::error ::The dependency installation failed. Visit ${PACKAGE_URL}"
@@ -106,8 +107,9 @@ jobs:
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+          TEST_COMMAND: ${{ inputs.test-command }}
         run: |
-          if ! ${{ inputs.test-command }}; then
+          if ! eval "$TEST_COMMAND"; then
             echo "::error ::The test failed. Visit ${PACKAGE_URL}"
             exit 1
           fi
