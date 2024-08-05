@@ -22,7 +22,6 @@ packages:
   - 'stylelint-config-rational-order'
   - 'stylelint-config-recess-order'
   - 'stylelint-config-recommended'
-  - 'stylelint-config-recommended-less'
   - 'stylelint-config-recommended-scss'
   - 'stylelint-config-recommended-vue'
   - 'stylelint-config-sass-guidelines'
@@ -39,7 +38,10 @@ packages:
   - 'stylelint-declaration-strict-value'
   - 'stylelint-formatter-pretty'
   - 'stylelint-high-performance-animation'
-  - 'stylelint-less'
+  - [
+      'stylelint-less',
+      { install-command: 'pnpm i', build-command: 'pnpm -r build', test-command: 'pnpm -r test' },
+    ]
   - 'stylelint-media-use-custom-media'
   - 'stylelint-no-unsupported-browser-features'
   - 'stylelint-order'

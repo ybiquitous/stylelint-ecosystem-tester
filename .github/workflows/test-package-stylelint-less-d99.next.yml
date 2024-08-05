@@ -23,3 +23,6 @@ jobs:
     with:
       package: stylelint-less
       stylelint-version: stylelint/stylelint
+      install-command: pnpm i
+      build-command: pnpm -r build
+      test-command: pnpm -r test

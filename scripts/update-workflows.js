@@ -35,12 +35,16 @@ function generateWorkflow({
 	workflow.jobs.test.with.package = pkg;
 	workflow.jobs.test.with['stylelint-version'] = stylelintVersion;
 
-	if (config['test-command']) {
-		workflow.jobs.test.with['test-command'] = config['test-command'];
-	}
-
 	if (config['install-command']) {
 		workflow.jobs.test.with['install-command'] = config['install-command'];
+	}
+
+	if (config['build-command']) {
+		workflow.jobs.test.with['build-command'] = config['build-command'];
+	}
+
+	if (config['test-command']) {
+		workflow.jobs.test.with['test-command'] = config['test-command'];
 	}
 
 	return workflow;
