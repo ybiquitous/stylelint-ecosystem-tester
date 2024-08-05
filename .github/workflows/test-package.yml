@@ -11,6 +11,14 @@ on:
         type: string
         description: The Stylelint version to test
         required: true
+      test-command:
+        type: string
+        description: The test command to run
+        default: 'npm test'
+      install-command:
+        type: string
+        description: The install command to run
+        default: 'npm install --no-audit'
 
 jobs:
   test:
@@ -64,8 +72,9 @@ jobs:
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+          INSTALL_COMMAND: ${{ inputs.install-command }}
         run: |
-          if ! npm install --no-audit; then
+          if ! eval "$INSTALL_COMMAND"; then
             echo "::error ::The dependency installation failed. Visit ${PACKAGE_URL}"
             exit 1
           fi
@@ -98,8 +107,9 @@ jobs:
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+          TEST_COMMAND: ${{ inputs.test-command }}
         run: |
-          if ! npm test; then
+          if ! eval "$TEST_COMMAND"; then
             echo "::error ::The test failed. Visit ${PACKAGE_URL}"
             exit 1
           fi

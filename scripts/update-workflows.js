@@ -10,6 +10,7 @@ import workflowFilename from './utils/workflow-filename.js';
 function generateWorkflow({
 	concurrencyGroup,
 	pkg,
+	config,
 	stylelintVersion,
 	template,
 	workflowFilePath,
@@ -33,6 +34,14 @@ function generateWorkflow({
 	workflow.jobs.test.with ??= {};
 	workflow.jobs.test.with.package = pkg;
 	workflow.jobs.test.with['stylelint-version'] = stylelintVersion;
+
+	if (config['test-command']) {
+		workflow.jobs.test.with['test-command'] = config['test-command'];
+	}
+
+	if (config['install-command']) {
+		workflow.jobs.test.with['install-command'] = config['install-command'];
+	}
 
 	return workflow;
 }
@@ -58,13 +67,16 @@ const workflowTemplateFile = new URL('../templates/test-package.yml', import.met
 const workflowTemplateContent = readFileSync(workflowTemplateFile, 'utf8');
 
 // Generate workflows for each package
-ecosystemData.packages.forEach((pkg) => {
-	const slug = generateSlug(pkg);
+ecosystemData.packages.forEach((packageConfig, index) => {
+	const [pkg, config = {}] = [packageConfig].flat();
+
+	const slug = generateSlug(pkg, index);
 
 	const latestStylelintWorkflowFilePath = `.github/workflows/${workflowFilename(slug, 'latest')}`;
 	const latestStylelintWorkflow = generateWorkflow({
 		concurrencyGroup: `\${{ github.workflow }}-\${{ github.ref }}-${slug}-latest`,
 		pkg,
+		config,
 		stylelintVersion: 'stylelint@latest',
 		template: workflowTemplateContent,
 		workflowFilePath: latestStylelintWorkflowFilePath,
@@ -81,6 +93,7 @@ ecosystemData.packages.forEach((pkg) => {
 	const nextStylelintWorkflow = generateWorkflow({
 		concurrencyGroup: `\${{ github.workflow }}-\${{ github.ref }}-${slug}-next`,
 		pkg,
+		config,
 		stylelintVersion: 'stylelint/stylelint',
 		template: workflowTemplateContent,
 		workflowFilePath: nextStylelintWorkflowFilePath,
