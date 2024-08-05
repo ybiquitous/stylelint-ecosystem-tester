@@ -11,14 +11,18 @@ on:
         type: string
         description: The Stylelint version to test
         required: true
-      test-command:
-        type: string
-        description: The test command to run
-        default: 'npm test'
       install-command:
         type: string
         description: The install command to run
         default: 'npm install --no-audit'
+      build-command:
+        type: string
+        description: The build command to run
+        default: 'npm run build --if-present'
+      test-command:
+        type: string
+        description: The test command to run
+        default: 'npm test'
 
 jobs:
   test:
@@ -96,8 +100,9 @@ jobs:
         working-directory: ${{ steps.repo-info.outputs.directory }}
         env:
           PACKAGE_URL: ${{ steps.repo-info.outputs.url }}
+          BUILD_COMMAND: ${{ inputs.build-command }}
         run: |
-          if ! npm run build --if-present; then
+          if ! eval "$BUILD_COMMAND"; then
             echo "::error ::The build failed. Visit ${PACKAGE_URL}"
             exit 1
           fi
